@@ -16,7 +16,7 @@ struct CommentsView: View {
     var post: PostModel
     
     @State var profilePicture: UIImage = UIImage(named: "logo.loading")!
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     @AppStorage(CurrentUserDefaults.displayName) var displayName: String?
     @State var showOnBoarding = false
 

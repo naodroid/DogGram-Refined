@@ -16,7 +16,7 @@ struct UploadView: View {
     
     @State var showPostImageView = false
     @State var showOnBoarding = false
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
 
     var body: some View {
         ZStack {

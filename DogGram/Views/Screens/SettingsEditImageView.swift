@@ -18,7 +18,7 @@ struct SettingsEditImageView: View {
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var profileImage: UIImage
     @State var showSuccessAlert: Bool = false
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

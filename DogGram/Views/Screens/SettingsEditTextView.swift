@@ -23,7 +23,7 @@ struct SettingsEditTextView: View {
     @State var placeholder: String
     @State var settingsEditTextOption: SettingsEditTextOption
     @Binding var profileText: String
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     @State var showSuccessAlert: Bool = false
 
     let haptics = UINotificationFeedbackGenerator()

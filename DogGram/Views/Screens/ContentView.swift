@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @AppStorage(CurrentUserDefaults.userId)
+    @AppStorage(CurrentUserDefaults.userID)
     var currentUserID: String?
     @AppStorage(CurrentUserDefaults.displayName)
     var currentUserDisplayName: String?

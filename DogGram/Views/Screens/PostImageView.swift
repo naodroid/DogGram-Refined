@@ -13,7 +13,7 @@ struct PostImageView: View {
     
     @State var captionText: String = ""
     @Binding var imageSelected: UIImage
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     @AppStorage(CurrentUserDefaults.displayName) var currestUserDisplayName: String?
     
     @State var showAlert = false

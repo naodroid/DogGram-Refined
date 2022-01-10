@@ -15,7 +15,7 @@ struct SettingsView: View {
     @Binding var userDisplayName: String
     @Binding var userBio: String
     @Binding var userProfilePicture: UIImage
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
 
     var body: some View {
         NavigationView {
