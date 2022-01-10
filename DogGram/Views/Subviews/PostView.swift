@@ -18,7 +18,7 @@ struct PostView: View {
     
     @State var profileImage: UIImage = UIImage(named: "logo.loading")!
     @State var postImage: UIImage = UIImage(named: "logo.loading")!
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     
     @State var alertTitle: String = ""
     @State var alertMessage: String = ""

@@ -17,7 +17,7 @@ class DataService {
     private var REF_REPORTS = DB_BASE.collection("reports")
     private var REF_FEEDBACK = DB_BASE.collection("feedback")
 
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     
     func uploadPost(image: UIImage,
                     caption: String?,

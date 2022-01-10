@@ -12,7 +12,7 @@ struct DatabaseUserField {
     static let email: String = "email"
     static let providerId: String = "provider_id"
     static let provider: String = "provider"
-    static let userId: String = "user_id"
+    static let userID: String = "user_id"
     static let bio: String = "bio"
     static let dateCreated: String = "date_created"
 }
@@ -54,6 +54,6 @@ struct DatabaseFeedbackFeed {
 
 struct CurrentUserDefaults {
     static let displayName: String = "display_name"
-    static let userId: String = "user_id"
+    static let userID: String = "user_id"
     static let bio: String = "bio"
 }

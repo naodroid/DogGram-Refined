@@ -20,6 +20,8 @@ class AuthService {
     static let instance = AuthService()
     
     private var REF_USERS = DB_BASE.collection("users")
+    private let signInWithApple = SignInWithApple()
+    
     
     // MARK: Auth user functions
     func logInUserToFirebase(credential: AuthCredential,
@@ -56,7 +58,7 @@ class AuthService {
             if let name = name, let bio = bio {
                 handler(true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    UserDefaults.standard.set(userID, forKey: CurrentUserDefaults.userId)
+                    UserDefaults.standard.set(userID, forKey: CurrentUserDefaults.userID)
                     UserDefaults.standard.set(name, forKey: CurrentUserDefaults.displayName)
                     UserDefaults.standard.set(bio, forKey: CurrentUserDefaults.bio)
                 }
@@ -73,12 +75,12 @@ class AuthService {
         providerID: String,
         provider: String,
         profileImage: UIImage,
-        handler: @escaping (_ userId: String?) -> ()
+        handler: @escaping (_ userID: String?) -> ()
     ) {
         let document = REF_USERS.document()
-        let userId = document.documentID
+        let userID = document.documentID
         //upload profile image to storage
-        ImageManager.instance.uploadProfileImage(userID: userId,
+        ImageManager.instance.uploadProfileImage(userID: userID,
                                                  image: profileImage) { success in
             
         }
@@ -88,7 +90,7 @@ class AuthService {
             DatabaseUserField.email: email,
             DatabaseUserField.providerId: providerID,
             DatabaseUserField.provider: provider,
-            DatabaseUserField.userId: userId,
+            DatabaseUserField.userID: userID,
             DatabaseUserField.bio: "",
             DatabaseUserField.dateCreated: FieldValue.serverTimestamp()
         ]
@@ -98,7 +100,7 @@ class AuthService {
                 handler(nil)
                 return
             }
-            handler(userId)
+            handler(userID)
         }
     }
     
@@ -106,7 +108,7 @@ class AuthService {
                                              handler: @escaping (_ existingUserID: String?) -> ()
     ) {
         // If a userID is returned, then the user does exist in our database
-        REF_USERS.whereField(DatabaseUserField.userId, isEqualTo: providerID)
+        REF_USERS.whereField(DatabaseUserField.userID, isEqualTo: providerID)
             .getDocuments { (snapshot, error) in
                 if let snapshot = snapshot,
                     snapshot.count > 1,

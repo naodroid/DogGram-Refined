@@ -12,7 +12,7 @@ struct MessageView: View {
     @State var comment: CommentModel
     @State var profilePicture: UIImage = UIImage(named: "logo.loading")!
     @State var showOnBoarding = false
-    @AppStorage(CurrentUserDefaults.userId) var currentUserID: String?
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     @State var showDeletingConfirmAlert = false
     
     let onDeleted: ((_ postID: String) -> ())?

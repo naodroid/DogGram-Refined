@@ -14,6 +14,8 @@ struct DogGramApp: App {
     
     @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
     
+    @State private var appModule = AppModule()
+    
     init() {
         // in iOS15, Navigation Header will be transparent.
         // Set color manually to avoid this effect.
@@ -36,6 +38,7 @@ struct DogGramApp: App {
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
+                .environment(\.appModule, appModule)
         }
     }
 }

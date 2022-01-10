@@ -13,7 +13,7 @@ struct LoggedInGuard: ViewModifier {
     func body(content: Content) -> some View {
         return content.fullScreenCover(isPresented: $showOnBoarding) {
         } content: {
-            OnBoardingView()
+            OnBoardingScreen()
         }
     }
 }

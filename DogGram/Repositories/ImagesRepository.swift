@@ -15,6 +15,10 @@ actor ImagesRepository {
     private let imageCache = NSCache<AnyObject, UIImage>()
     private var storage = Storage.storage()
     
+    nonisolated init() {
+    }
+    
+    
     // MARK: Profile images
     
     /// Upload the image as the user's profile image

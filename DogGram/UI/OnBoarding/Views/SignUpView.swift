@@ -62,7 +62,7 @@ struct SignUpView: View {
         .fullScreenCover(isPresented: $showOnBoarding) {
             
         } content: {
-            OnBoardingView()
+            OnBoardingScreen()
         }
     }
 }
