@@ -10,7 +10,7 @@ import FirebaseStorage
 import UIKit
 
 
-actor ImagesRepeository {
+actor ImagesRepository {
     
     private let imageCache = NSCache<AnyObject, UIImage>()
     private var storage = Storage.storage()

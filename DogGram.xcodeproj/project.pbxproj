@@ -38,6 +38,15 @@
 		359EB71D27890B07004B3EA2 /* SettingsFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB71C27890B07004B3EA2 /* SettingsFeedbackView.swift */; };
 		359EB71F27890FFC004B3EA2 /* LoggedInGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB71E27890FFC004B3EA2 /* LoggedInGuard.swift */; };
 		359EB72127891571004B3EA2 /* UnlikeAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB72027891571004B3EA2 /* UnlikeAnimationView.swift */; };
+		359EB726278A86C0004B3EA2 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB725278A86C0004B3EA2 /* AuthRepository.swift */; };
+		359EB728278A8798004B3EA2 /* DogGramStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB727278A8798004B3EA2 /* DogGramStorage.swift */; };
+		359EB72B278A88F0004B3EA2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB72A278A88F0004B3EA2 /* User.swift */; };
+		359EB731278A9790004B3EA2 /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB730278A9790004B3EA2 /* UsersRepository.swift */; };
+		359EB733278A97CB004B3EA2 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB732278A97CB004B3EA2 /* AuthUseCase.swift */; };
+		359EB735278A9FC4004B3EA2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB734278A9FC4004B3EA2 /* Errors.swift */; };
+		359EB737278AA207004B3EA2 /* ImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB736278AA207004B3EA2 /* ImagesRepository.swift */; };
+		359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB73A278BAF4D004B3EA2 /* UIImage+Ext.swift */; };
+		359EB73E278BB295004B3EA2 /* RepositoryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB73D278BB295004B3EA2 /* RepositoryModule.swift */; };
 		35A33E03274677CD005F29D5 /* DogGramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E02274677CD005F29D5 /* DogGramApp.swift */; };
 		35A33E05274677CD005F29D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E04274677CD005F29D5 /* ContentView.swift */; };
 		35A33E07274677CD005F29D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35A33E06274677CD005F29D5 /* Assets.xcassets */; };
@@ -86,6 +95,15 @@
 		359EB71C27890B07004B3EA2 /* SettingsFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeedbackView.swift; sourceTree = "<group>"; };
 		359EB71E27890FFC004B3EA2 /* LoggedInGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInGuard.swift; sourceTree = "<group>"; };
 		359EB72027891571004B3EA2 /* UnlikeAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlikeAnimationView.swift; sourceTree = "<group>"; };
+		359EB725278A86C0004B3EA2 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		359EB727278A8798004B3EA2 /* DogGramStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogGramStorage.swift; sourceTree = "<group>"; };
+		359EB72A278A88F0004B3EA2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		359EB730278A9790004B3EA2 /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
+		359EB732278A97CB004B3EA2 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
+		359EB734278A9FC4004B3EA2 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		359EB736278AA207004B3EA2 /* ImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesRepository.swift; sourceTree = "<group>"; };
+		359EB73A278BAF4D004B3EA2 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		359EB73D278BB295004B3EA2 /* RepositoryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModule.swift; sourceTree = "<group>"; };
 		35A33DFF274677CD005F29D5 /* DogGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35A33E02274677CD005F29D5 /* DogGramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogGramApp.swift; sourceTree = "<group>"; };
 		35A33E04274677CD005F29D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -146,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				3523287A276F0B740024E84D /* ImageManager.swift */,
+				359EB73A278BAF4D004B3EA2 /* UIImage+Ext.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -175,6 +194,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		359EB722278A84EE004B3EA2 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				359EB725278A86C0004B3EA2 /* AuthRepository.swift */,
+				359EB730278A9790004B3EA2 /* UsersRepository.swift */,
+				359EB736278AA207004B3EA2 /* ImagesRepository.swift */,
+				359EB727278A8798004B3EA2 /* DogGramStorage.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		359EB729278A88E6004B3EA2 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				359EB734278A9FC4004B3EA2 /* Errors.swift */,
+				359EB72A278A88F0004B3EA2 /* User.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		359EB72C278A9740004B3EA2 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				359EB732278A97CB004B3EA2 /* AuthUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		359EB73C278BB283004B3EA2 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				359EB73D278BB295004B3EA2 /* RepositoryModule.swift */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
 		35A33DF6274677CD005F29D5 = {
 			isa = PBXGroup;
 			children = (
@@ -197,11 +252,15 @@
 			children = (
 				351DE47D276953A300B75AB3 /* Info.plist */,
 				356CC65027600BF1002A7B94 /* DogGram.entitlements */,
+				359EB729278A88E6004B3EA2 /* Entities */,
 				35A33E1527468B8A005F29D5 /* Helpers */,
 				35A33E1E2747D876005F29D5 /* Models */,
+				359EB73C278BB283004B3EA2 /* Module */,
 				356CC65127600CB1002A7B94 /* Services */,
+				359EB722278A84EE004B3EA2 /* Repositories */,
 				35A33E1227468916005F29D5 /* Views */,
 				35232879276F0B5E0024E84D /* Utilities */,
+				359EB72C278A9740004B3EA2 /* UseCases */,
 				35A33E06274677CD005F29D5 /* Assets.xcassets */,
 				35A33E10274687E6005F29D5 /* Launch Screen.storyboard */,
 				356CC63C27600576002A7B94 /* GoogleService-Info.plist */,
@@ -383,17 +442,24 @@
 				35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */,
 				35A33E202747D884005F29D5 /* PostModel.swift in Sources */,
 				3580C6D4275514D800035AF0 /* SettingsLabelView.swift in Sources */,
+				359EB731278A9790004B3EA2 /* UsersRepository.swift in Sources */,
 				35B28D44275C29F5009A9EDB /* OnBoardingView.swift in Sources */,
 				356B9C63274E73B400543EF3 /* PostImageView.swift in Sources */,
+				359EB726278A86C0004B3EA2 /* AuthRepository.swift in Sources */,
+				359EB733278A97CB004B3EA2 /* AuthUseCase.swift in Sources */,
 				3580C6DC275651C200035AF0 /* SignUpView.swift in Sources */,
 				3523287B276F0B740024E84D /* ImageManager.swift in Sources */,
 				35A33E05274677CD005F29D5 /* ContentView.swift in Sources */,
 				35A33E262747E060005F29D5 /* MessageView.swift in Sources */,
+				359EB735278A9FC4004B3EA2 /* Errors.swift in Sources */,
+				359EB737278AA207004B3EA2 /* ImagesRepository.swift in Sources */,
 				35A33E1727468B9D005F29D5 /* Extensions.swift in Sources */,
 				3520E24B277FD53100AB7C3A /* LazyView.swift in Sources */,
+				359EB728278A8798004B3EA2 /* DogGramStorage.swift in Sources */,
 				35A33E222747DACD005F29D5 /* PostArrayObject.swift in Sources */,
 				35A33E34274A1C3A005F29D5 /* ImageGridView.swift in Sources */,
 				356CC65427600CCA002A7B94 /* SignInWithApple.swift in Sources */,
+				359EB72B278A88F0004B3EA2 /* User.swift in Sources */,
 				35A33E1B274693E8005F29D5 /* PostView.swift in Sources */,
 				356B9C65274E78FD00543EF3 /* ProfileView.swift in Sources */,
 				35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */,
@@ -408,12 +474,14 @@
 				359EB71D27890B07004B3EA2 /* SettingsFeedbackView.swift in Sources */,
 				35A33E32274A16AA005F29D5 /* CarouselView.swift in Sources */,
 				35A33E03274677CD005F29D5 /* DogGramApp.swift in Sources */,
+				359EB73E278BB295004B3EA2 /* RepositoryModule.swift in Sources */,
 				359EB72127891571004B3EA2 /* UnlikeAnimationView.swift in Sources */,
 				359EB71F27890FFC004B3EA2 /* LoggedInGuard.swift in Sources */,
 				35B28D48275C2D48009A9EDB /* OnBoardingViewPart2.swift in Sources */,
 				3580C6D22755135900035AF0 /* SettingsView.swift in Sources */,
 				3580C6D8275647AF00035AF0 /* SettingsEditTextView.swift in Sources */,
 				3580C6D627563F0900035AF0 /* SettingsRowView.swift in Sources */,
+				359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */,
 				3520E249277DBDE900AB7C3A /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
