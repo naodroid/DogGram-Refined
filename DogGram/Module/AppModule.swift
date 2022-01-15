@@ -11,7 +11,13 @@ import SwiftUI
 class AppModule {
     lazy var authRepository: AuthRepository = AuthRepository()
     lazy var imagesRepository: ImagesRepository = ImagesRepository()
-    lazy var usersRepository: UsersRepository = UsersRepository(imageRepository: imagesRepository)
+    lazy var usersRepository: UsersRepository = UsersRepository(
+        imageRepository: imagesRepository
+    )
+    lazy var postsRepository: PostsRepository = PostsRepository(
+        authRepository: authRepository,
+        usersRepository: usersRepository
+    )
 }
 
 
@@ -27,3 +33,18 @@ extension EnvironmentValues {
     }
 }
 
+
+
+protocol AppModuleUsing {
+    var appModule: AppModule { get }
+    var authRepository: AuthRepository { get }
+    var imagesRepository: ImagesRepository { get }
+    var usersRepository: UsersRepository { get }
+    var postsRepository: PostsRepository { get }
+}
+extension AppModuleUsing {
+    var authRepository: AuthRepository { appModule.authRepository }
+    var imagesRepository: ImagesRepository { appModule.imagesRepository }
+    var usersRepository: UsersRepository { appModule.usersRepository }
+    var postsRepository: PostsRepository {appModule.postsRepository }
+}

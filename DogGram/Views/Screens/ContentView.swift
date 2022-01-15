@@ -22,8 +22,8 @@ struct ContentView: View {
         TabView {
             NavigationView {
                 FeedView(
-                    posts: feedPosts,
-                    title: "Feed View"
+                    title: "Feed View",
+                    posts: [] //TODO
                 )
             }
             .tabItem {
@@ -46,12 +46,7 @@ struct ContentView: View {
             ZStack {
                 if let userID = currentUserID, let displayName = currentUserDisplayName {
                     NavigationView {
-                        ProfileView(
-                            isMyProfile: true,
-                            profileDisplayName: displayName,
-                            profileUserID: userID,
-                            posts: PostArrayObject(userID: userID)
-                        )
+                        ProfileScreen(type: .topPage)
                     }
                 } else {
                     SignUpView()

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ImageGridView: View {
-    @ObservedObject var posts: PostArrayObject
-    
+    let posts: [Post]
     
     var body: some View {
         LazyVGrid(
@@ -22,32 +21,30 @@ struct ImageGridView: View {
             spacing: nil,
             pinnedViews: [])
         {
-            ForEach(posts.dataArray, id: \.self) { post in
+            ForEach(posts, id: \.self) { post in
                 NavigationLink(
                     destination: FeedView(
-                        posts: PostArrayObject(post: post),
-                        title: "\(post.postID)"
+                        //TODO:
+                        title: "\(post.postID)",
+                        posts: []
                     ),
                     label: {
-                        PostView(
+                        PostScreen(
                             post: post,
-                            addHeartAnimationToView: false,
-                            showHeaderAndFooter: false,
-                            onPostDeleted: onPostDeleted
+                            showHeaderAndFooler: false,
+                            addHeartAnimationToView: false
                         )
                     }
                 )
             }
         }
     }
-    private func onPostDeleted(_ postID: String) {
-        posts.deletePost(for: postID)
-    }
 }
 
 struct ImageGridView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageGridView(posts: PostArrayObject())
+        //TODO: Create preview posts
+        ImageGridView(posts: [])
             .previewLayout(.sizeThatFits)
     }
 }

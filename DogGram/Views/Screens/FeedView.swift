@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct FeedView: View {
-    @StateObject var posts: PostArrayObject
-    var title: String
+    let title: String
+    let posts: [Post]
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             LazyVStack {
-                ForEach(posts.dataArray, id: \.self) { (post) in
-                    PostView(post: post,
-                             addHeartAnimationToView: true,
-                             showHeaderAndFooter: true,
-                             onPostDeleted: onPostDeleted
+                ForEach(posts, id: \.self) { (post) in
+                    PostScreen(
+                        post: post,
+                        showHeaderAndFooler: true,
+                        addHeartAnimationToView: true
                     )
                 }
             }
@@ -26,15 +26,13 @@ struct FeedView: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
     }
-    private func onPostDeleted(_ postID: String) {
-        posts.deletePost(for: postID)
-    }
 }
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
+        //TODO: Create preview posts
         NavigationView {
-            FeedView(posts: PostArrayObject(), title: "Feed Test")
+            FeedView(title: "Feed Test", posts: [])
         }
     }
 }

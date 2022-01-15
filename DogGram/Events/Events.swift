@@ -10,6 +10,7 @@ import Foundation
 
 enum Event {
     case onUserChanged(userID: String?)
+    case onPostsUpdated(posts: [Post])
 }
 // 
 extension Event {

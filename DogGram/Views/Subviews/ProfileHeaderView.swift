@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @Binding var profileDisplayName: String
-    @Binding var profileImage: UIImage
-    @ObservedObject var postArray: PostArrayObject
-    @Binding var profileBio: String
+    @EnvironmentObject private var viewModel: ProfileViewModel
 
     var body: some View {
         VStack(
@@ -19,7 +16,7 @@ struct ProfileHeaderView: View {
             spacing: 10
         ) {
             // MARK: Profile picture
-            Image(uiImage: profileImage)
+            Image(uiImage: viewModel.profileImage)
                 .resizable()
                 .scaledToFill()
                 .frame(
@@ -30,12 +27,12 @@ struct ProfileHeaderView: View {
                 .cornerRadius(60)
             
             // MARK: User Name
-            Text(profileDisplayName)
+            Text(viewModel.user?.displayName ?? "")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            if !profileBio.isEmpty {
-                Text(profileBio)
+            if let bio = viewModel.user?.bio, !bio.isEmpty {
+                Text(bio)
                     .font(.body)
                     .fontWeight(.regular)
                     .multilineTextAlignment(.center)
@@ -46,11 +43,12 @@ struct ProfileHeaderView: View {
                 spacing: 20
             ) {
                 // MARK: Posts
+                // TODO
                 VStack(
                     alignment: .center,
                     spacing: 5
                 ) {
-                    Text("\(postArray.postCountString)")
+                    Text("TODO")
                         .font(.title2)
                         .fontWeight(.bold)
                     Capsule()
@@ -66,11 +64,12 @@ struct ProfileHeaderView: View {
                     
                 }
                 // MARK: Likes
+                // TODO
                 VStack(
                     alignment: .center,
                     spacing: 5
                 ) {
-                    Text(postArray.likeCountString)
+                    Text("TODO")
                         .font(.title2)
                         .fontWeight(.bold)
                     Capsule()
@@ -93,17 +92,9 @@ struct ProfileHeaderView: View {
 }
 
 struct ProfileHeaderView_Previews: PreviewProvider {
-    @State static var profileDisplayName: String = "Joe"
-    @State static var profileImage: UIImage = UIImage(named: "logos.logo")!
-    @State static var profileBio: String = "Bio"
 
     static var previews: some View {
-        ProfileHeaderView(
-            profileDisplayName: $profileDisplayName,
-            profileImage: $profileImage,
-            postArray: PostArrayObject(),
-            profileBio: $profileBio
-        )
+        ProfileHeaderView()
             .previewLayout(.sizeThatFits)
     }
 }

@@ -21,10 +21,8 @@ struct MessageView: View {
         HStack {
             NavigationLink {
                 LazyView {
-                    ProfileView(isMyProfile: false,
-                                profileDisplayName: comment.username,
-                                profileUserID: comment.userID,
-                                posts: PostArrayObject(userID: comment.username)
+                    ProfileScreen(
+                        type: .specifiedUser(userID: comment.userID)
                     )
                 }
             } label: {

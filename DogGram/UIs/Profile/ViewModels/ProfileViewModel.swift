@@ -9,17 +9,12 @@ import Foundation
 import SwiftUI
 
 
-enum ProfileViewType {
-    case topPage
-    case specifiedUser(userID: String)
-}
-
 @MainActor
 final class ProfileViewModel: ObservableObject {
     @Published private(set) var isMyProfile: Bool = false
     @Published private(set) var user: User?
-    @Published private(set) var profileImage: UIImage?
-    @Published private(set) var posts: [PostModel] = []
+    @Published private(set) var profileImage: UIImage = UIImage(named: "logo.loading")!
+    @Published private(set) var posts: [Post] = []
     @Published private(set) var fetchError: Error?
     
     private let profileType: ProfileViewType
@@ -41,7 +36,7 @@ final class ProfileViewModel: ObservableObject {
             case .specifiedUser(let userID):
                 self.userID = userID
             }
-            await self.getUserInfo()
+            _ = await (self.getUserInfo(), self.getProfileImage())
         }
     }
     func onDisappear() {
@@ -60,6 +55,16 @@ final class ProfileViewModel: ObservableObject {
             // TODO: fetch posts
         } catch {
             self.fetchError = error
+        }
+    }
+    private func getProfileImage() async {
+        guard let userID = userID else {
+            return
+        }
+        do {
+            let image = try await appModule.imagesRepository.downloadProfileImage(userID: userID)
+            self.profileImage = image
+        } catch {
         }
     }
     

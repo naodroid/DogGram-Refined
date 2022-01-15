@@ -14,7 +14,8 @@ struct BrowseView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             CarouselView()
-            ImageGridView(posts: posts)
+            //TODO
+            ImageGridView(posts: [])
         }
         .navigationTitle("Browse")
         .navigationBarTitleDisplayMode(.inline)
