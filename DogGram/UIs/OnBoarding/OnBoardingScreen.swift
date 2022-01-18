@@ -24,6 +24,13 @@ private struct _OnBoardingScreen: View {
     }
     
     var body: some View {
-        OnBoardingView().environmentObject(viewModel)
+        OnBoardingView()
+            .environmentObject(viewModel)
+            .onAppear {
+                viewModel.onAppear()
+            }
+            .onDisappear {
+                viewModel.onDisappear()
+            }
     }
 }

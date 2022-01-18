@@ -32,7 +32,7 @@ struct DatabaseCommentField {
     static let commentID: String = "post_id"
     static let userID: String = "user_id"
     static let displayName: String = "display_name"
-    static let content: String = "comments" // sub collection
+    static let content: String = "content" // sub collection
     static let dateCreated: String = "date_created"
     static let likeCount: String = "like_count"
     static let likedBy: String = "liked_by"

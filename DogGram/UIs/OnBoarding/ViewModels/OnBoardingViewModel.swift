@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 import FirebaseAuth
 
 @MainActor
@@ -26,13 +27,18 @@ final class OnBoardingViewModel: ObservableObject {
     private var authRepository: AuthRepository { appModule.authRepository }
     private var usersRepository: UsersRepository { appModule.usersRepository }
     
+    private var cancellableList: [AnyCancellable] = []
     
     init(appModule: AppModule) {
         self.appModule = appModule
     }
+    func onAppear() {
+    }
+    func onDisappear() {
+        cancellableList.cancelAll()
+    }
     
     func createProfile() {
-        print("CREATE PROFILE")
         AuthService.instance.createNewUserInDatabase(
             name: displayName,
             email: email,
@@ -88,7 +94,7 @@ final class OnBoardingViewModel: ObservableObject {
                 }
             } catch {
             }
-        }
+        }.store(in: &cancellableList)
     }
     
     

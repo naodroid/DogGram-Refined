@@ -117,12 +117,6 @@ struct PostView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.onAppear()
-        }
-        .onDisappear {
-            viewModel.onDisappear()
-        }
         .alert(isPresented: $viewModel.showAlert) { () -> Alert in
             return Alert(title: Text(viewModel.alertTitle),
                          message: Text(viewModel.alertMessage),

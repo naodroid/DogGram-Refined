@@ -7,8 +7,7 @@
 
 import Foundation
 import SwiftUI
-import FirebaseAuth
-
+import Combine
 
 enum PostActionSheetOption {
     case menu
@@ -40,6 +39,8 @@ final class PostViewModel: ObservableObject, AppModuleUsing {
     @Published private(set)var actionSheetType: PostActionSheetOption?
     @Published var showAlert: Bool = false
     @Published var showOnBoarding: Bool = false
+    
+    private var cancellable: AnyCancellable?
     
     // computed properties
     var likedByUser: Bool {
@@ -89,9 +90,13 @@ final class PostViewModel: ObservableObject, AppModuleUsing {
                 }
             }
         }
+        self.cancellable = EventDispatcher.stream.sink { event in
+            self.on(event: event)
+        }
     }
     func onDisappear() {
-        
+        self.cancellable?.cancel()
+        self.cancellable = nil
     }
     
     // MARK: Event Handling

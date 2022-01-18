@@ -24,7 +24,7 @@ struct Comment: Identifiable, Codable, Hashable {
         case commentID = "post_id"
         case userID = "user_id"
         case displayName = "display_name"
-        case content = "comments" // sub collection
+        case content = "content"
         case dateCreated = "date_created"
         case likeCount = "like_count"
         case likedBy = "liked_by"

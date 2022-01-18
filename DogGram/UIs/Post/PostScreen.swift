@@ -45,6 +45,13 @@ private struct _PostScreen: View {
         PostView(
             showHeaderAndFooter: showHeaderAndFooler,
             addHeartAnimationToView: addHeartAnimationToView
-        ).environmentObject(viewModel)
+        )
+            .environmentObject(viewModel)
+            .onAppear {
+                viewModel.onAppear()
+            }
+            .onDisappear {
+                viewModel.onDisappear()
+            }
     }
 }

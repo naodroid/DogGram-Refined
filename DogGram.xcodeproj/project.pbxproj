@@ -22,13 +22,16 @@
 		353CC7A7279271E700417E8E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7A6279271E700417E8E /* PostViewModel.swift */; };
 		353CC7AB279272E000417E8E /* PostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7AA279272E000417E8E /* PostScreen.swift */; };
 		353CC7AD2792754000417E8E /* PostsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7AC2792754000417E8E /* PostsRepository.swift */; };
-		353CC7B027927DE300417E8E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7AF27927DE300417E8E /* Task.swift */; };
+		353CC7B027927DE300417E8E /* Task+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7AF27927DE300417E8E /* Task+Ext.swift */; };
 		3543F7C52790ED490078B386 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3543F7C42790ED490078B386 /* Comment.swift */; };
 		356B9C63274E73B400543EF3 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B9C62274E73B400543EF3 /* PostImageView.swift */; };
 		356B9C65274E78FD00543EF3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B9C64274E78FD00543EF3 /* ProfileView.swift */; };
 		356B9C67274E7A1A00543EF3 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B9C66274E7A1A00543EF3 /* ProfileHeaderView.swift */; };
 		356CC63D27600576002A7B94 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 356CC63C27600576002A7B94 /* GoogleService-Info.plist */; };
 		356CC65427600CCA002A7B94 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC65327600CCA002A7B94 /* SignInWithApple.swift */; };
+		3578AD8C2796396900C17CBA /* FeedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578AD8B2796396900C17CBA /* FeedScreen.swift */; };
+		3578AD902796398E00C17CBA /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578AD8F2796398E00C17CBA /* FeedViewModel.swift */; };
+		3578ADA92796C76900C17CBA /* AnyCancellable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578ADA82796C76900C17CBA /* AnyCancellable+Ext.swift */; };
 		3580C6D22755135900035AF0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580C6D12755135900035AF0 /* SettingsView.swift */; };
 		3580C6D4275514D800035AF0 /* SettingsLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580C6D3275514D800035AF0 /* SettingsLabelView.swift */; };
 		3580C6D627563F0900035AF0 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580C6D527563F0900035AF0 /* SettingsRowView.swift */; };
@@ -116,13 +119,16 @@
 		353CC7A6279271E700417E8E /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		353CC7AA279272E000417E8E /* PostScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScreen.swift; sourceTree = "<group>"; };
 		353CC7AC2792754000417E8E /* PostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRepository.swift; sourceTree = "<group>"; };
-		353CC7AF27927DE300417E8E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		353CC7AF27927DE300417E8E /* Task+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Ext.swift"; sourceTree = "<group>"; };
 		3543F7C42790ED490078B386 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		356B9C62274E73B400543EF3 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		356B9C64274E78FD00543EF3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		356B9C66274E7A1A00543EF3 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		356CC63C27600576002A7B94 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		356CC65327600CCA002A7B94 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
+		3578AD8B2796396900C17CBA /* FeedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedScreen.swift; sourceTree = "<group>"; };
+		3578AD8F2796398E00C17CBA /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		3578ADA82796C76900C17CBA /* AnyCancellable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyCancellable+Ext.swift"; sourceTree = "<group>"; };
 		3580C6D12755135900035AF0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3580C6D3275514D800035AF0 /* SettingsLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLabelView.swift; sourceTree = "<group>"; };
 		3580C6D527563F0900035AF0 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
@@ -290,7 +296,8 @@
 		353CC7AE27927DD600417E8E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				353CC7AF27927DE300417E8E /* Task.swift */,
+				353CC7AF27927DE300417E8E /* Task+Ext.swift */,
+				3578ADA82796C76900C17CBA /* AnyCancellable+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,9 +320,36 @@
 			path = SignInProviders;
 			sourceTree = "<group>";
 		};
+		3578AD8A2796395400C17CBA /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				3578AD8D2796396D00C17CBA /* Views */,
+				3578AD8E2796397200C17CBA /* ViewModels */,
+				3578AD8B2796396900C17CBA /* FeedScreen.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		3578AD8D2796396D00C17CBA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35A33E1827468C8C005F29D5 /* FeedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3578AD8E2796397200C17CBA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3578AD8F2796398E00C17CBA /* FeedViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		35882429278BBC4C00167C46 /* UIs */ = {
 			isa = PBXGroup;
 			children = (
+				3578AD8A2796395400C17CBA /* Feed */,
 				353CC7A5279271D600417E8E /* Post */,
 				35EF9A27278CFE6C00E12E2A /* Profile */,
 				3588242A278BBC5400167C46 /* OnBoarding */,
@@ -456,7 +490,6 @@
 				35A33E232747DE25005F29D5 /* CommentsView.swift */,
 				35A33E04274677CD005F29D5 /* ContentView.swift */,
 				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
-				35A33E1827468C8C005F29D5 /* FeedView.swift */,
 				35A33E37274A2423005F29D5 /* ImagePicker.swift */,
 				356B9C62274E73B400543EF3 /* PostImageView.swift */,
 				3580C6D12755135900035AF0 /* SettingsView.swift */,
@@ -617,7 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35882430278BC56300167C46 /* SignInResult.swift in Sources */,
-				353CC7B027927DE300417E8E /* Task.swift in Sources */,
+				353CC7B027927DE300417E8E /* Task+Ext.swift in Sources */,
 				35882435278BCC3A00167C46 /* EventDispatcher.swift in Sources */,
 				35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */,
 				35A33E1927468C8C005F29D5 /* FeedView.swift in Sources */,
@@ -651,6 +684,8 @@
 				35A33E1B274693E8005F29D5 /* PostView.swift in Sources */,
 				356B9C65274E78FD00543EF3 /* ProfileView.swift in Sources */,
 				3588242C278BBC8200167C46 /* OnBoardingScreen.swift in Sources */,
+				3578AD902796398E00C17CBA /* FeedViewModel.swift in Sources */,
+				3578AD8C2796396900C17CBA /* FeedScreen.swift in Sources */,
 				35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */,
 				35A33E30274A160F005F29D5 /* BrowseView.swift in Sources */,
 				35A33E282747E193005F29D5 /* CommentModel.swift in Sources */,
@@ -675,6 +710,7 @@
 				35EF9A2B278CFE9500E12E2A /* ProfileScreen.swift in Sources */,
 				3580C6D627563F0900035AF0 /* SettingsRowView.swift in Sources */,
 				35882428278BBBBE00167C46 /* OnBoardingViewModel.swift in Sources */,
+				3578ADA92796C76900C17CBA /* AnyCancellable+Ext.swift in Sources */,
 				359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */,
 				3520E249277DBDE900AB7C3A /* DataService.swift in Sources */,
 			);
@@ -899,8 +935,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				kind = exactVersion;
+				version = 8.10.0;
 			};
 		};
 		353CC7A227926D4C00417E8E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
