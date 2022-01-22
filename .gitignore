@@ -34,5 +34,6 @@ Assets.xcassets/
 Launch\ Screen.storyboard
 
 # ignore firebase resources
-Resources/
+DogGram/Resources/GoogleSignIn.bundle/
+DogGram/Resources/gRPCCertificates-Cpp.bundle/
 
