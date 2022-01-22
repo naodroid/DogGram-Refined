@@ -2,7 +2,7 @@
 //  SettingsEditTextView.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/30.
+//  Created by naodroid on 2021/11/30.
 //
 
 import SwiftUI
@@ -57,7 +57,7 @@ struct SettingsEditImageView: View {
             } content: {
                 ImagePicker(
                     imageSelected: $selectedImage,
-                    sourceType: $sourceType
+                    sourceType: sourceType
                 )
             }
             

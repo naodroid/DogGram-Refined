@@ -2,7 +2,7 @@
 //  MessageView.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/19.
+//  Created by naodroid on 2021/11/19.
 //
 
 import SwiftUI

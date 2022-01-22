@@ -33,3 +33,6 @@ GoogleService-Info.plist
 Assets.xcassets/
 Launch\ Screen.storyboard
 
+# ignore firebase resources
+Resources/
+

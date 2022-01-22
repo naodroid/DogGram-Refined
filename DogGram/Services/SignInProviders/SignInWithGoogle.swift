@@ -2,12 +2,13 @@
 //  SignInWithGoogle.swift
 //  DogGram
 //
-//  Created by nao on 2021/12/15.
+//  Created by naodroid on 2021/12/15.
 //
 
 import Foundation
 import SwiftUI
-import Firebase
+import FirebaseCore
+import FirebaseAuth
 import GoogleSignIn
 
 // TODO: Multi Factor Authentication

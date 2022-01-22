@@ -2,7 +2,7 @@
 //  UnlikeAnimationView.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/08.
+//  Created by naodroid on 2022/01/08.
 //
 
 import SwiftUI

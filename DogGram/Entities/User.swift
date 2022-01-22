@@ -2,19 +2,20 @@
 //  User.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/09.
+//  Created by naodroid on 2022/01/09.
 //
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 /// User Data stored in firebase
 struct User: Codable {
+    @DocumentID var documentID: String? = nil
     var displayName: String
     var email: String
     var providerId: String
     var provider: String
-    var userID: String
     var bio: String
     var dateCreated: Timestamp? // if nil, send FieldValue.serverTimestamp
     
@@ -23,8 +24,22 @@ struct User: Codable {
         case email = "email"
         case providerId = "provider_id"
         case provider = "provider"
-        case userID = "user_id"
         case bio = "bio"
         case dateCreated = "date_created"
     }
+    
+    static func decodeArray(snapshot: QuerySnapshot?) -> [User] {
+        guard let documents = snapshot?.documents else {
+            return []
+        }
+        let decoder =  Firestore.Decoder()
+        return documents.compactMap { s in
+            do {
+                return try decoder.decode(User.self, from: s.data())
+            } catch {
+                return nil
+            }
+        }
+    }
+
 }

@@ -2,7 +2,7 @@
 //  ImagePicker.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/21.
+//  Created by naodroid on 2021/11/21.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import SwiftUI
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var imageSelected: UIImage
     @Environment(\.presentationMode) var presentationMode
-    @Binding var sourceType: UIImagePickerController.SourceType
+    let sourceType: UIImagePickerController.SourceType
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()

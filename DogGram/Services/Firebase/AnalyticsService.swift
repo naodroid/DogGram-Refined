@@ -2,7 +2,7 @@
 //  AnalyticsService.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/04.
+//  Created by naodroid on 2022/01/04.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  ImageGridView.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/21.
+//  Created by naodroid on 2021/11/21.
 //
 
 import SwiftUI
@@ -24,9 +24,8 @@ struct ImageGridView: View {
             ForEach(posts, id: \.self) { post in
                 NavigationLink(
                     destination: FeedView(
-                        //TODO:
-                        title: "\(post.postID)",
-                        posts: []
+                        //TODO: set title
+                        title: "\(post.id)"
                     ),
                     label: {
                         PostScreen(

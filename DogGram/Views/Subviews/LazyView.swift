@@ -2,7 +2,7 @@
 //  LazyView.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/01.
+//  Created by naodroid on 2022/01/01.
 //
 
 import Foundation

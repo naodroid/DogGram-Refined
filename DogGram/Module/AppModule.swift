@@ -2,21 +2,25 @@
 //  RepositoryModule.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/10.
+//  Created by naodroid on 2022/01/10.
 //
 
 import Foundation
 import SwiftUI
 
 class AppModule {
-    lazy var authRepository: AuthRepository = AuthRepository()
     lazy var imagesRepository: ImagesRepository = ImagesRepository()
     lazy var usersRepository: UsersRepository = UsersRepository(
         imageRepository: imagesRepository
     )
+    lazy var authRepository: AuthRepository = AuthRepository(
+        usersRepository: usersRepository,
+        imagesRepository: imagesRepository
+    )
     lazy var postsRepository: PostsRepository = PostsRepository(
         authRepository: authRepository,
-        usersRepository: usersRepository
+        usersRepository: usersRepository,
+        imagesRepository: imagesRepository
     )
 }
 

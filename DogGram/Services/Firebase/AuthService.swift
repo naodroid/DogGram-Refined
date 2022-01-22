@@ -2,7 +2,7 @@
 //  AuthService.swift
 //  DogGram
 //
-//  Created by nao on 2021/12/18.
+//  Created by naodroid on 2021/12/18.
 //
 
 import Foundation

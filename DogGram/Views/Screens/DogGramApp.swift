@@ -2,7 +2,7 @@
 //  DogGramApp.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/18.
+//  Created by naodroid on 2021/11/18.
 //
 
 import SwiftUI
@@ -34,7 +34,7 @@ struct DogGramApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentScreen()
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }

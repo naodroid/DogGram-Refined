@@ -2,7 +2,7 @@
 //  SignInWithApple.swift
 //  DogGram
 //
-//  Created by nao on 2021/12/08.
+//  Created by naodroid on 2021/12/08.
 //
 
 import Foundation

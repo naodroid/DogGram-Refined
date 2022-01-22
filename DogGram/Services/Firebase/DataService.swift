@@ -2,7 +2,7 @@
 //  DataService.swift
 //  DogGram
 //
-//  Created by nao on 2021/12/30.
+//  Created by naodroid on 2021/12/30.
 //
 
 // Used to handle upload and downloading (other than Users) from our database
@@ -113,6 +113,8 @@ class DataService {
             return []
         }
         for document in snapshot.documents {
+            print(document.data())
+            
             guard
                 let postID = document.get(DatabasePostField.postID) as? String,
                 let userID = document.get(DatabasePostField.userID) as? String,

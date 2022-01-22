@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/29.
+//  Created by naodroid on 2021/11/29.
 //
 
 import SwiftUI

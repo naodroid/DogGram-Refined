@@ -2,12 +2,14 @@
 //  PostsRepository.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/15.
+//  Created by naodroid on 2022/01/15.
 //
 
 import Foundation
+import UIKit
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+
 
 /// Repository for users
 actor PostsRepository {
@@ -16,15 +18,18 @@ actor PostsRepository {
     
     private let authRepository: AuthRepository
     private let usersRepository: UsersRepository
-    
+    private let imagesRepository: ImagesRepository
+
     
     private var cache: [String: Post] = [:]
     
     
     nonisolated init(authRepository: AuthRepository,
-                     usersRepository: UsersRepository) {
+                     usersRepository: UsersRepository,
+                     imagesRepository: ImagesRepository) {
         self.authRepository = authRepository
         self.usersRepository = usersRepository
+        self.imagesRepository = imagesRepository
     }
     
     
@@ -54,21 +59,14 @@ actor PostsRepository {
         return try await getPosts(with: query)
     }
     private func getPosts(with query: Query) async throws  -> [Post] {
-        return try await withCheckedThrowingContinuation { continuation in
-            return query.getDocuments { snapshot, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                let posts = Post.decode(snapshot: snapshot)
-                continuation.resume(returning: posts)
-                self.updateLocalCache(posts: posts)
-            }
-        }
+        let snapshot = try await query.getDocuments()
+        let posts = Post.decodeArray(snapshot: snapshot)
+        self.updateLocalCache(posts: posts)
+        return posts
     }
     private func updateLocalCache(posts: [Post]) {
         posts.forEach { p in
-            cache[p.postID] = p
+            cache[p.id] = p
         }
         Event.onPostsUpdated(posts: posts).post()
     }
@@ -76,6 +74,33 @@ actor PostsRepository {
     func getPosts(forPostIDs ids: [String]) -> [Post] {
         return ids.compactMap { cache[$0] }
     }
+    
+    // MARK: Upload Post
+    @discardableResult
+    func uploadPost(image: UIImage,
+                    caption: String?,
+                    displayName: String,
+                    userID: String) async throws -> Post {
+        // Create new post document
+        let document = postsRef.document()
+        let documentID = document.documentID
+        
+        // Upload image to storage
+        try await imagesRepository.uploadPostImage(postID: documentID, image: image)
+        let post = Post(documentID: documentID,
+                        dateCreated: nil,
+                        userID: userID,
+                        displayName: displayName,
+                        caption: caption,
+                        likeCount: 0,
+                        likedBy: [],
+                        comments: [])
+        try document.setData(from: post)
+        updateLocalCache(posts: [post])
+        return post
+    }
+
+    
     
     //--------------------------------------------
     // MARK: Like/Unlike
@@ -90,7 +115,11 @@ actor PostsRepository {
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
         return try await withCheckedThrowingContinuation({ continuation in
-            postsRef.document(post.postID).updateData(data) { error in
+            guard let postID = post.documentID else {
+                continuation.resume(throwing: NSError())
+                return
+            }
+            postsRef.document(postID).updateData(data) { error in
                 if let error = error {
                     continuation.resume(throwing: error)
                     return
@@ -105,7 +134,10 @@ actor PostsRepository {
         })
     }
     func unlike(post: Post) async throws {
-        guard let currentUserID = await authRepository.currentUserID else {
+        guard
+            let currentUserID = await authRepository.currentUserID,
+            let postID = post.documentID
+        else {
             return
         }
 
@@ -114,7 +146,7 @@ actor PostsRepository {
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
         return try await withCheckedThrowingContinuation({ continuation in
-            postsRef.document(post.postID).updateData(data) { error in
+            postsRef.document(postID).updateData(data) { error in
                 if let error = error {
                     continuation.resume(throwing: error)
                     return

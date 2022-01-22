@@ -2,7 +2,7 @@
 //  ImageManager.swift
 //  DogGram
 //
-//  Created by nao on 2021/12/19.
+//  Created by naodroid on 2021/12/19.
 //
 
 import Foundation

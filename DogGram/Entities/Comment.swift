@@ -2,7 +2,7 @@
 //  Comment.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/14.
+//  Created by naodroid on 2022/01/14.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  UsersRepository.swift
 //  DogGram
 //
-//  Created by nao on 2022/01/09.
+//  Created by naodroid on 2022/01/09.
 //
 
 import Foundation
@@ -30,57 +30,36 @@ actor UsersRepository {
         providerID: String,
         provider: String,
         profileImage: UIImage
-    ) async throws -> String {
+    ) async throws -> User {
         let document = usersRef.document()
-        let userID = document.documentID
+        let documentID = document.documentID
         
-        try await imageRepository.uploadProfileImage(userID: userID, image: profileImage)
+        try await imageRepository.uploadProfileImage(
+            userID: documentID,
+            image: profileImage
+        )
         //set user data
-        let user = User(displayName: name,
-                        email: email,
-                        providerId: providerID,
-                        provider: provider,
-                        userID: userID,
-                        bio: "",
-                        dateCreated: nil)
-        return try await withCheckedThrowingContinuation { continuation in
-            do {
-                try document.setData(from: user)
-                continuation.resume(returning: userID)
-            } catch {
-                continuation.resume(throwing: error)
-            }
-            //            document.setData(user.toDict()) { error in
-            //                if let error = error {
-            //                    continuation.resume(throwing: error)
-            //                    return
-            //                }
-            //                continuation.resume(returning: userID)
-            //            }
-        }
+        let user = User(
+            documentID: documentID,
+            displayName: name,
+            email: email,
+            providerId: providerID,
+            provider: provider,
+            bio: "",
+            dateCreated: nil)
+        try document.setData(from: user)
+        return user
     }
     
-    /// returns userID if exists. if not exists, retuns nil
-    /// - Parameter providerID: providerID
-    func checkIfUserExistsInDatabase(providerID: String) async throws -> String? {
-        // If a userID is returned, then the user does exist in our database
-        return try await withCheckedThrowingContinuation { continuation in
-            usersRef.whereField(User.CodingKeys.userID.rawValue, isEqualTo: providerID)
-                .getDocuments { (snapshot, error) in
-                    if let error = error {
-                        continuation.resume(throwing: error)
-                        return
-                    }
-                    if let snapshot = snapshot,
-                       snapshot.count > 1,
-                       let document = snapshot.documents.first {
-                        let existingUserID = document.documentID
-                        continuation.resume(returning: existingUserID)
-                        return
-                    }
-                    continuation.resume(returning: nil)
-                }
-        }
+    /// returns user if exists. if not exists, retun nil
+    /// - Parameter fromProviderID: providerID
+    func checkIfUserExists(fromProviderID providerID: String) async throws -> User? {
+        let documents = try await usersRef.whereField(
+            User.CodingKeys.providerId.rawValue,
+            isEqualTo: providerID
+        ).getDocuments()
+        let users = User.decodeArray(snapshot: documents)
+        return users.first
     }
     
     

@@ -2,7 +2,7 @@
 //  BrowseView.swift
 //  DogGram
 //
-//  Created by nao on 2021/11/21.
+//  Created by naodroid on 2021/11/21.
 //
 
 import SwiftUI
