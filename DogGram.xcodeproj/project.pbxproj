@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		350303D02797AC7D0091C546 /* FirebaseTarget in Frameworks */ = {isa = PBXBuildFile; productRef = 350303CF2797AC7D0091C546 /* FirebaseTarget */; };
 		350A468B279B7B8A00C846C6 /* UploadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A468A279B7B8A00C846C6 /* UploadScreen.swift */; };
 		350A468D279B7BAA00C846C6 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A468C279B7BAA00C846C6 /* UploadViewModel.swift */; };
 		350A468F279B805800C846C6 /* PostImageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A468E279B805800C846C6 /* PostImageScreen.swift */; };
@@ -82,6 +81,7 @@
 		35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */; };
 		35E90E4A279CC90F009631BE /* gRPCCertificates-Cpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E48279CC90F009631BE /* gRPCCertificates-Cpp.bundle */; };
 		35E90E4B279CC90F009631BE /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E49279CC90F009631BE /* GoogleSignIn.bundle */; };
+		35E90E4F279CD3D1009631BE /* FirebaseTarget in Frameworks */ = {isa = PBXBuildFile; productRef = 35E90E4E279CD3D1009631BE /* FirebaseTarget */; };
 		35EF9A2B278CFE9500E12E2A /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF9A2A278CFE9500E12E2A /* ProfileScreen.swift */; };
 		35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF9A2C278CFEE800E12E2A /* ProfileViewType.swift */; };
 /* End PBXBuildFile section */
@@ -199,7 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				350303D02797AC7D0091C546 /* FirebaseTarget in Frameworks */,
+				35E90E4F279CD3D1009631BE /* FirebaseTarget in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +664,7 @@
 			);
 			name = DogGram;
 			packageProductDependencies = (
-				350303CF2797AC7D0091C546 /* FirebaseTarget */,
+				35E90E4E279CD3D1009631BE /* FirebaseTarget */,
 			);
 			productName = DogGram;
 			productReference = 35A33DFF274677CD005F29D5 /* DogGram.app */;
@@ -1014,7 +1014,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		350303CF2797AC7D0091C546 /* FirebaseTarget */ = {
+		35E90E4E279CD3D1009631BE /* FirebaseTarget */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseTarget;
 		};

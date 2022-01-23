@@ -1,3 +1,10 @@
 *.xcframework/
 .swiftpm/
-Sources/FirebaseFirestoreSwift/Sources/
+
+# ignore sources in firebasefirestore
+LICENSE*
+METADATA
+*.hpp
+*.swift
+!.gitkeep
+

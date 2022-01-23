@@ -87,9 +87,14 @@ let package = Package(
     + [
         .target(
             name: "FirebaseFirestoreSwift",
-            
             dependencies: [
                 "FirebaseFirestore"
+            ],
+            exclude: [
+                "Sources/third_party/FirestoreEncoder/LICENSE",
+                "Sources/third_party/FirestoreEncoder/METADATA",
+                "Sources/third_party/nlohmann_json/LICENSE.MIT",
+                "Sources/third_party/nlohmann_json/METADATA",
             ]
         )
     ],
