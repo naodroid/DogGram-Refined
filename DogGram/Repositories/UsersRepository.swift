@@ -55,10 +55,10 @@ actor UsersRepository {
     /// - Parameter fromProviderID: providerID
     func checkIfUserExists(fromProviderID providerID: String) async throws -> User? {
         let documents = try await usersRef.whereField(
-            User.CodingKeys.providerId.rawValue,
+            User.Keys.providerId.rawValue,
             isEqualTo: providerID
         ).getDocuments()
-        let users = User.decodeArray(snapshot: documents)
+        let users = User.decodeArray(from: documents)
         return users.first
     }
     
@@ -66,12 +66,10 @@ actor UsersRepository {
     // MARK: fetch
     func getProfile(for userID: String) async throws -> User {
         let snapshot = try await usersRef.document(userID).getDocument()
-        guard let data = snapshot.data() else {
+        guard let user = User.decode(from: snapshot) else {
             //TODO: create custom error type
             throw NSError()
         }
-        var user: User = try Firestore.Decoder().decode(User.self, from: data, in: nil)
-        user.id = userID //Firebase didn't put userID, instead put it own
         return user
     }
 }

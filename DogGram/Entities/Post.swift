@@ -19,28 +19,30 @@ struct Post: Codable, Hashable, Identifiable {
     var likedBy: [String]
     var comments: [Comment]
     
-    enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
-        case displayName = "display_name"
+    enum Keys: String {
+        case userID = "userId"
+        case displayName = "displayName"
         case caption = "caption"
-        case likeCount = "like_count"
-        case likedBy = "liked_by"
+        case likeCount = "likeCount"
+        case likedBy = "likedBy"
         case comments = "comments"
+        case dateCreated = "dateCreated"
     }
     
-    static func decodeArray(snapshot: QuerySnapshot?) -> [Post] {
+    static func decode(from document: DocumentSnapshot) -> Post? {
+        do {
+            return try document.data(as: Post.self)
+        } catch {
+            print("Post Decoding Error: \(error)")
+            return nil
+        }
+    }
+    static func decodeArray(from snapshot: QuerySnapshot?) -> [Post] {
         guard let documents = snapshot?.documents else {
             return []
         }
-        let decoder =  Firestore.Decoder()
         return documents.compactMap { s in
-            print(s.data())
-            do {
-                return try decoder.decode(Post.self, from: s.data())
-            } catch {
-                print(error)
-                return nil
-            }
+            return decode(from: s)
         }
     }
 }

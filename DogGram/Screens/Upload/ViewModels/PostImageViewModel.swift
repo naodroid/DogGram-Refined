@@ -74,7 +74,6 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
     }
     
     // MARK: UI events
-    // MARK: Functions
     func postPicture() {
         guard let user = user, let userID = user.id else {
             self.alertType = .postFailed(message: "Invalid User Info. Please restart app.")

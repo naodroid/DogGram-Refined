@@ -45,7 +45,7 @@ actor PostsRepository {
     /// get posts that has been posted by the user
     func getPostForUser(_ userID: String) async throws -> [Post] {
         let query = self.postsRef.whereField(
-                Post.CodingKeys.userID.rawValue,
+                Post.Keys.userID.rawValue,
                 isEqualTo: userID
             )
         return try await getPosts(with: query)
@@ -53,14 +53,14 @@ actor PostsRepository {
     /// get posts for feed
     func getPostsForFeed() async throws -> [Post] {
         let query = postsRef.order(
-            by: DatabasePostField.dateCreated,
+            by: Post.Keys.dateCreated.rawValue,
             descending: true
         ).limit(to: 50)
         return try await getPosts(with: query)
     }
     private func getPosts(with query: Query) async throws  -> [Post] {
         let snapshot = try await query.getDocuments()
-        let posts = Post.decodeArray(snapshot: snapshot)
+        let posts = Post.decodeArray(from: snapshot)
         self.updateLocalCache(posts: posts)
         return posts
     }
@@ -90,7 +90,6 @@ actor PostsRepository {
         // Upload image to storage
         try await imagesRepository.uploadPostImage(postID: documentID, image: image)
         let post = Post(id: documentID,
-                        dateCreated: nil,
                         userID: userID,
                         displayName: displayName,
                         caption: caption,
@@ -113,8 +112,8 @@ actor PostsRepository {
         }
 
         let data: [String: Any] = [
-            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
-            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
+            Post.Keys.likeCount.rawValue: FieldValue.increment(Int64(1)),
+            Post.Keys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
         return try await withCheckedThrowingContinuation({ continuation in
             guard let postID = post.id else {
@@ -144,8 +143,8 @@ actor PostsRepository {
         }
 
         let data: [String: Any] = [
-            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
-            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
+            Post.Keys.likeCount.rawValue: FieldValue.increment(Int64(1)),
+            Post.Keys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
         return try await withCheckedThrowingContinuation({ continuation in
             postsRef.document(postID).updateData(data) { error in

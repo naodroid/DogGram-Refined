@@ -19,26 +19,29 @@ struct User: Codable, Identifiable {
     var bio: String
     @ServerTimestamp var dateCreated: Timestamp?
     
-    enum CodingKeys: String, CodingKey {
-        case displayName = "display_name"
+    enum Keys: String {
+        case displayName = "displayName"
         case email = "email"
-        case providerId = "provider_id"
+        case providerId = "providerId"
         case provider = "provider"
         case bio = "bio"
-        case dateCreated = "date_created"
+        case dateCreated = "dateCreated"
     }
     
-    static func decodeArray(snapshot: QuerySnapshot?) -> [User] {
+    static func decode(from document: DocumentSnapshot) -> User? {
+        do {
+            return try document.data(as: User.self)
+        } catch {
+            print("User Decoding Error: \(error)")
+            return nil
+        }
+    }
+    static func decodeArray(from snapshot: QuerySnapshot?) -> [User] {
         guard let documents = snapshot?.documents else {
             return []
         }
-        let decoder =  Firestore.Decoder()
-        return documents.compactMap { s in
-            do {
-                return try decoder.decode(User.self, from: s.data())
-            } catch {
-                return nil
-            }
+        return documents.compactMap { d in
+            decode(from: d)
         }
     }
 

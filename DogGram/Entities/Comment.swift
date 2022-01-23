@@ -20,13 +20,13 @@ struct Comment: Identifiable, Codable, Hashable {
     let likedBy: [String] //listOfUserID
     var id: String { commentID }
     
-    enum CodingKeys: String, CodingKey {
-        case commentID = "post_id"
-        case userID = "user_id"
-        case displayName = "display_name"
+    enum Keys: String {
+        case commentID = "postId"
+        case userID = "userId"
+        case displayName = "displayName"
         case content = "content"
-        case dateCreated = "date_created"
-        case likeCount = "like_count"
-        case likedBy = "liked_by"
+        case dateCreated = "dateCreated"
+        case likeCount = "likeCount"
+        case likedBy = "likedBy"
     }
 }
