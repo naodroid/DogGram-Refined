@@ -9,9 +9,8 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Post: Codable, Hashable {
-    var id: String { documentID ?? "" } //for hashable
-    @DocumentID var documentID: String?
+struct Post: Codable, Hashable, Identifiable {
+    @DocumentID var id: String?
     @ServerTimestamp var dateCreated: Timestamp?
     let userID: String
     let displayName: String

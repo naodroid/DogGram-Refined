@@ -10,14 +10,14 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 /// User Data stored in firebase
-struct User: Codable {
-    @DocumentID var documentID: String? = nil
+struct User: Codable, Identifiable {
+    @DocumentID var id: String?
     var displayName: String
     var email: String
     var providerId: String
     var provider: String
     var bio: String
-    var dateCreated: Timestamp? // if nil, send FieldValue.serverTimestamp
+    @ServerTimestamp var dateCreated: Timestamp?
     
     enum CodingKeys: String, CodingKey {
         case displayName = "display_name"

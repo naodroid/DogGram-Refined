@@ -81,7 +81,7 @@ final class PostViewModel: ObservableObject, AppModuleUsing {
             currentUserID = await authRepository.currentUserID
             if !imageFetched {
                 do {
-                    guard let postID = post.documentID else {
+                    guard let postID = post.id else {
                         return
                     }
                     postImage = try await imagesRepository.downloadPostImage(postID: postID)
@@ -113,7 +113,7 @@ final class PostViewModel: ObservableObject, AppModuleUsing {
         }
     }
     private func onUpdate(posts: [Post]) {
-        guard let p = posts.first(where: { $0.documentID == post.documentID }) else {
+        guard let p = posts.first(where: { $0.id == post.id }) else {
             return
         }
         post = p

@@ -31,19 +31,19 @@ struct StoredValue<T> {
 }
 
 struct DogGramStorage {
-    @StoredValue(key: "documentID", defaultValue: nil)
-    static var userDocumentID: String?
-    @StoredValue(key: "displayName", defaultValue: nil)
+    @StoredValue(key: "userID", defaultValue: nil)
+    static var userID: String?
+    @StoredValue(key: "userDisplayName", defaultValue: nil)
     static var userDisplayName: String?
-    @StoredValue(key: "email", defaultValue: nil)
+    @StoredValue(key: "userEmail", defaultValue: nil)
     static var userEmail: String?
-    @StoredValue(key: "providerId", defaultValue: nil)
+    @StoredValue(key: "userProviderId", defaultValue: nil)
     static var userProviderId: String?
-    @StoredValue(key: "provider", defaultValue: nil)
+    @StoredValue(key: "userProvider", defaultValue: nil)
     static var userProvider: String?
-    @StoredValue(key: "bio", defaultValue: nil)
+    @StoredValue(key: "userBio", defaultValue: nil)
     static var userBio: String?
-    @StoredValue(key: "dateCreated", defaultValue: nil)
+    @StoredValue(key: "userDateCreated", defaultValue: nil)
     static var userDateCreated: Date?
     
     
@@ -51,19 +51,18 @@ struct DogGramStorage {
     static var currentUser: User? {
         get {
             guard
-                let documentID = self.userDocumentID,
+                let id = self.userID,
                 let displayName = self.userDisplayName,
                 let email = self.userEmail,
                 let providerId = self.userProviderId,
                 let provider = self.userProvider,
-                let documentID = self.userDocumentID,
                 let bio = self.userBio else {
                     return nil
                 }
             let dateCreated = self.userDateCreated ?? Date()
             let timestamp = Timestamp(date: dateCreated)
             return User(
-                documentID: documentID,
+                id: id,
                 displayName: displayName,
                 email: email,
                 providerId: providerId,
@@ -74,7 +73,7 @@ struct DogGramStorage {
         }
         set {
             guard let user = newValue else {
-                self.userDocumentID = nil
+                self.userID = nil
                 self.userDisplayName = nil
                 self.userEmail = nil
                 self.userProviderId = nil
@@ -83,7 +82,7 @@ struct DogGramStorage {
                 self.userDateCreated = nil
                 return
             }
-            self.userDocumentID = user.documentID
+            self.userID = user.id
             self.userDisplayName = user.displayName
             self.userEmail = user.email
             self.userProviderId = user.providerId

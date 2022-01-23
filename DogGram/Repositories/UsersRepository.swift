@@ -40,7 +40,7 @@ actor UsersRepository {
         )
         //set user data
         let user = User(
-            documentID: documentID,
+            id: documentID,
             displayName: name,
             email: email,
             providerId: providerID,
@@ -65,20 +65,14 @@ actor UsersRepository {
     
     // MARK: fetch
     func getProfile(for userID: String) async throws -> User {
-        return try await withCheckedThrowingContinuation { continuation in
-            usersRef.document(userID).getDocument { snapshot, error in
-                do {
-                    if let data = snapshot?.data() {
-                        let user = try Firestore.Decoder().decode(User.self, from: data, in: nil)
-                        continuation.resume(returning: user)
-                    } else {
-                        throw NSError()
-                    }
-                } catch {
-                    continuation.resume(throwing: error)
-                }
-            }
+        let snapshot = try await usersRef.document(userID).getDocument()
+        guard let data = snapshot.data() else {
+            //TODO: create custom error type
+            throw NSError()
         }
+        var user: User = try Firestore.Decoder().decode(User.self, from: data, in: nil)
+        user.id = userID //Firebase didn't put userID, instead put it own
+        return user
     }
 }
 

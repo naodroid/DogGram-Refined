@@ -22,7 +22,7 @@ actor AuthRepository {
     
     private(set) var currentUser: User?
     var currentUserID: String? {
-        currentUser?.documentID
+        currentUser?.id
     }
     
     private let signInWithApple = SignInWithApple()
@@ -41,7 +41,7 @@ actor AuthRepository {
         self.currentUser = DogGramStorage.currentUser
         
         if let user = Auth.auth().currentUser,
-           self.currentUser?.documentID != user.uid {
+           self.currentUser?.id != user.uid {
             //TODO: Check UserID is valid or not
         }
     }
@@ -49,7 +49,7 @@ actor AuthRepository {
     private func setCurrentUser(_ user: User?) {
         self.currentUser = user
         DogGramStorage.currentUser = user
-        Event.onUserChanged(userID: user?.documentID).post()
+        Event.onUserChanged(userID: user?.id).post()
     }
     
     // MARK: Sign in with providers

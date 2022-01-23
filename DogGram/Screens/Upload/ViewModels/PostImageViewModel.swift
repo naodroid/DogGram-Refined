@@ -76,9 +76,7 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
     // MARK: UI events
     // MARK: Functions
     func postPicture() {
-        guard let userID = currentUserID,
-              let displayName = currentUserDisplayName
-        else {
+        guard let user = user, let userID = user.id else {
             self.alertType = .postFailed(message: "Invalid User Info. Please restart app.")
             return
         }
@@ -86,7 +84,7 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
             do {
                 try await postsRepository.uploadPost(image: imageSelected,
                                                      caption: captionText,
-                                                     displayName: displayName,
+                                                     displayName: user.displayName,
                                                      userID: userID)
                 self.alertType = .postFinished
             } catch {
@@ -94,7 +92,5 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
             }
         }.store(in: &cancellableList)
     }
-
-        
 }
 

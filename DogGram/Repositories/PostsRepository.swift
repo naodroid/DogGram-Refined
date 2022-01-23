@@ -66,7 +66,9 @@ actor PostsRepository {
     }
     private func updateLocalCache(posts: [Post]) {
         posts.forEach { p in
-            cache[p.id] = p
+            if let id = p.id {
+                cache[id] = p
+            }
         }
         Event.onPostsUpdated(posts: posts).post()
     }
@@ -87,7 +89,7 @@ actor PostsRepository {
         
         // Upload image to storage
         try await imagesRepository.uploadPostImage(postID: documentID, image: image)
-        let post = Post(documentID: documentID,
+        let post = Post(id: documentID,
                         dateCreated: nil,
                         userID: userID,
                         displayName: displayName,
@@ -115,7 +117,7 @@ actor PostsRepository {
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
         return try await withCheckedThrowingContinuation({ continuation in
-            guard let postID = post.documentID else {
+            guard let postID = post.id else {
                 continuation.resume(throwing: NSError())
                 return
             }
@@ -136,7 +138,7 @@ actor PostsRepository {
     func unlike(post: Post) async throws {
         guard
             let currentUserID = await authRepository.currentUserID,
-            let postID = post.documentID
+            let postID = post.id
         else {
             return
         }
