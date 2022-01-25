@@ -86,6 +86,9 @@
 		35E90E4F279CD3D1009631BE /* FirebaseTarget in Frameworks */ = {isa = PBXBuildFile; productRef = 35E90E4E279CD3D1009631BE /* FirebaseTarget */; };
 		35EF9A2B278CFE9500E12E2A /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF9A2A278CFE9500E12E2A /* ProfileScreen.swift */; };
 		35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF9A2C278CFEE800E12E2A /* ProfileViewType.swift */; };
+		35F17786279FFC8C003EAB5D /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F17785279FFC8C003EAB5D /* SettingsScreen.swift */; };
+		35F1778A279FFCD4003EAB5D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F17789279FFCD4003EAB5D /* SettingsViewModel.swift */; };
+		35F1778C27A00458003EAB5D /* Firestore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1778B27A00458003EAB5D /* Firestore+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -196,6 +199,9 @@
 		35E90E4C279CC94D009631BE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		35EF9A2A278CFE9500E12E2A /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		35EF9A2C278CFEE800E12E2A /* ProfileViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewType.swift; sourceTree = "<group>"; };
+		35F17785279FFC8C003EAB5D /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		35F17789279FFCD4003EAB5D /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		35F1778B27A00458003EAB5D /* Firestore+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				35A33E2F274A160F005F29D5 /* BrowseView.swift */,
+				35A33E31274A16AA005F29D5 /* CarouselView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -409,6 +416,7 @@
 			children = (
 				353CC7AF27927DE300417E8E /* Task+Ext.swift */,
 				3578ADA82796C76900C17CBA /* AnyCancellable+Ext.swift */,
+				35F1778B27A00458003EAB5D /* Firestore+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -465,6 +473,7 @@
 				3578AD8A2796395400C17CBA /* Feed */,
 				3588242A278BBC5400167C46 /* OnBoarding */,
 				353CC7A5279271D600417E8E /* Post */,
+				35F17784279FFC76003EAB5D /* Settings */,
 				350A4687279B7B6700C846C6 /* Upload */,
 				35EF9A27278CFE6C00E12E2A /* Profile */,
 			);
@@ -605,10 +614,6 @@
 				35A33E232747DE25005F29D5 /* CommentsView.swift */,
 				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
 				35A33E37274A2423005F29D5 /* ImagePicker.swift */,
-				3580C6D12755135900035AF0 /* SettingsView.swift */,
-				3580C6D7275647AF00035AF0 /* SettingsEditTextView.swift */,
-				3580C6D927564B6400035AF0 /* SettingsEditImageView.swift */,
-				359EB71C27890B07004B3EA2 /* SettingsFeedbackView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -616,7 +621,6 @@
 		35A33E1427468927005F29D5 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				35A33E31274A16AA005F29D5 /* CarouselView.swift */,
 				35A33E33274A1C3A005F29D5 /* ImageGridView.swift */,
 				3520E24A277FD53100AB7C3A /* LazyView.swift */,
 				35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */,
@@ -673,6 +677,35 @@
 			isa = PBXGroup;
 			children = (
 				35882425278BB82700167C46 /* ProfileViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		35F17784279FFC76003EAB5D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				35F17787279FFC95003EAB5D /* Views */,
+				35F17788279FFC99003EAB5D /* ViewModels */,
+				35F17785279FFC8C003EAB5D /* SettingsScreen.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		35F17787279FFC95003EAB5D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3580C6D12755135900035AF0 /* SettingsView.swift */,
+				3580C6D7275647AF00035AF0 /* SettingsEditTextView.swift */,
+				3580C6D927564B6400035AF0 /* SettingsEditImageView.swift */,
+				359EB71C27890B07004B3EA2 /* SettingsFeedbackView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35F17788279FFC99003EAB5D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				35F17789279FFCD4003EAB5D /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -759,7 +792,9 @@
 				35882430278BC56300167C46 /* SignInResult.swift in Sources */,
 				353CC7B027927DE300417E8E /* Task+Ext.swift in Sources */,
 				35882435278BCC3A00167C46 /* EventDispatcher.swift in Sources */,
+				35F1778C27A00458003EAB5D /* Firestore+Ext.swift in Sources */,
 				35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */,
+				35F17786279FFC8C003EAB5D /* SettingsScreen.swift in Sources */,
 				35A33E1927468C8C005F29D5 /* FeedView.swift in Sources */,
 				35232876276DA8890024E84D /* AuthService.swift in Sources */,
 				359EB71B27847FA8004B3EA2 /* AnalyticsService.swift in Sources */,
@@ -768,6 +803,7 @@
 				35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */,
 				35A33E202747D884005F29D5 /* PostModel.swift in Sources */,
 				3580C6D4275514D800035AF0 /* SettingsLabelView.swift in Sources */,
+				35F1778A279FFCD4003EAB5D /* SettingsViewModel.swift in Sources */,
 				359EB731278A9790004B3EA2 /* UsersRepository.swift in Sources */,
 				35B28D44275C29F5009A9EDB /* OnBoardingView.swift in Sources */,
 				350A468F279B805800C846C6 /* PostImageScreen.swift in Sources */,

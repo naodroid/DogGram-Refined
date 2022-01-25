@@ -109,5 +109,26 @@ actor AuthRepository {
         setCurrentUser(user)
         return user
     }
+    
+    // MARK: Profile
+    func update(displayName: String? = nil,
+                bio: String? = nil) async throws -> User? {
+        guard
+            var user = currentUser,
+            let id = user.id
+        else {
+            return currentUser
+        }
+        
+        if let name = displayName {
+            user.displayName = name
+        }
+        if let bio = bio {
+            user.bio = bio
+        }
+        try await usersRepository.updateProfile(for: user)
+        setCurrentUser(user)
+        return user
+    }
 }
 

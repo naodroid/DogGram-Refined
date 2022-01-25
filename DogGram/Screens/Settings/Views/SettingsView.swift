@@ -10,13 +10,17 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
-    @State var showSignOutError: Bool = false
-    @State var showDeletingAccountError: Bool = false
-    @Binding var userDisplayName: String
-    @Binding var userBio: String
-    @Binding var userProfilePicture: UIImage
-    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
+    
+    @EnvironmentObject var viewModel: SettingsViewModel
+    
+    //TODO: Remove these
+    @State private var userDisplayName = ""
+    @State private var userBio = ""
+    @State private var userProfilePicture = UIImage(named: "logo.loading")!
+    @State private var showSignOutError = false
+    @State private var showDeletingAccountError = false
 
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: true) {
@@ -47,12 +51,7 @@ struct SettingsView: View {
                 ) {
                     NavigationLink(
                         destination: SettingsEditTextView(
-                            submissionText: userDisplayName,
-                            title: "Display Name",
-                            description: "You can edit your display name here. This will be seen by other users on your profile and on your posts!",
-                            placeholder: "Your display name here...",
-                            settingsEditTextOption: .displayName,
-                            profileText: $userDisplayName
+                            textOption: .displayName
                         )
                     ) {
                         SettingsRowView(
@@ -64,13 +63,7 @@ struct SettingsView: View {
                     
                     NavigationLink(
                         destination: SettingsEditTextView(
-                            submissionText: userBio,
-                            title: "Profile Bio",
-                            description: "Your bio is a great place to let other users know a little about you. It will be shown on your profile only.",
-                            placeholder: "Your bio here...",
-                            settingsEditTextOption: .bio,
-                            profileText: $userBio
-                            
+                            textOption: .bio
                         )
                     ) {
                         SettingsRowView(
@@ -104,7 +97,7 @@ struct SettingsView: View {
                         )
                     }
 
-                    if currentUserID != nil {
+                    if viewModel.user != nil {
                         Button {
                             signOut()
                         } label: {
@@ -230,7 +223,7 @@ struct SettingsView: View {
         }
     }
     func deleteAccount() {
-        guard let currentUserID = currentUserID else {
+        guard let currentUserID = viewModel.user?.id else {
             return
         }
         /// Remvoe all posts
@@ -275,11 +268,8 @@ struct SettingsView_Previews: PreviewProvider {
     @State static var userProfileImage: UIImage = UIImage(named: "dog1")!
     
     static var previews: some View {
-        SettingsView(
-            userDisplayName: $userDisplayName,
-            userBio: $userBio,
-            userProfilePicture: $userProfileImage
-        )
+        SettingsView()
+            .environmentObject(SettingsViewModel(appModule: AppModule()))
             .preferredColorScheme(.dark)
     }
 }

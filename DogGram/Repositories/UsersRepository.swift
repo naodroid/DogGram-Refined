@@ -47,7 +47,7 @@ actor UsersRepository {
             provider: provider,
             bio: "",
             dateCreated: nil)
-        try document.setData(from: user)
+        try await document.setDataAsync(from: user)
         return user
     }
     
@@ -71,6 +71,16 @@ actor UsersRepository {
             throw NSError()
         }
         return user
+    }
+    
+    
+    // MARK: Update
+    func updateProfile(for user: User) async throws {
+        guard let id = user.id else {
+            //TODO: create custom error
+            throw NSError(domain: "Invalid user", code: -1, userInfo: nil)
+        }
+        try await usersRef.document(id).setDataAsync(from: user)
     }
 }
 

@@ -10,33 +10,66 @@ import SwiftUI
 enum SettingsEditTextOption {
     case displayName
     case bio
+    
+    fileprivate var title: String {
+        switch self {
+        case .displayName:
+            return "Display Name"
+        case .bio:
+            return "Profile Bio"
+        }
+    }
+    fileprivate var description: String {
+        switch self {
+        case .displayName:
+            return "You can edit your display name here. This will be seen by other users on your profile and on your posts!"
+        case .bio:
+            return "Your bio is a great place to let other users know a little about you. It will be shown on your profile only."
+        }
+    }
+    fileprivate var placeholder: String {
+        switch self {
+        case .displayName:
+            return "Your display name here..."
+        case .bio:
+            return "Your bio here..."
+        }
+    }
 }
 
 struct SettingsEditTextView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: SettingsViewModel
     
-    @State var submissionText: String = ""
-    @State var title: String
-    @State var description: String
-    @State var placeholder: String
-    @State var settingsEditTextOption: SettingsEditTextOption
-    @Binding var profileText: String
-    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
-    @State var showSuccessAlert: Bool = false
+    @State private var submissionText: String = ""
+    let textOption: SettingsEditTextOption
+    
+    init(textOption: SettingsEditTextOption) {
+        self.textOption = textOption
+        let initialText: String
+        switch textOption {
+        case .displayName:
+            initialText = viewModel.user?.displayName ?? ""
+        case .bio:
+            initialText = viewModel.user?.bio ?? ""
+        }
+        
+        self._submissionText = State(wrappedValue: initialText)
+    }
 
     let haptics = UINotificationFeedbackGenerator()
     
     var body: some View {
         VStack {
             HStack {
-                Text(description)
+                Text(textOption.description)
                 Spacer(minLength: 0)
             }
             
             TextField(
-                placeholder,
+                textOption.placeholder,
                 text: $submissionText
             )
                 .padding()
@@ -68,8 +101,8 @@ struct SettingsEditTextView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .navigationTitle(title)
-        .alert(isPresented: $showSuccessAlert) { () -> Alert in
+        .navigationTitle(textOption.title)
+        .alert(isPresented: $viewModel.showEditingFinishedAlert) { () -> Alert in
             Alert(title: Text("Saved!"),
                   message: nil,
                   dismissButton: .default(
@@ -113,46 +146,49 @@ struct SettingsEditTextView: View {
     }
     func saveText() {
         guard textIsAppropriate(),
-        let currentUserID = currentUserID
+              let currentUserID = viewModel.user?.id
         else {
             return
         }
-        switch settingsEditTextOption {
+        switch textOption {
         case .displayName:
-            profileText = submissionText
-            // Update stored data
-            UserDefaults.standard.set(submissionText,
-                                      forKey: CurrentUserDefaults.displayName)
-            // Update all names on all posts from this user
-            DataService.instance.updateDisplayNameOnPosts(userID: currentUserID,
-                                                          displayName: submissionText)
-            // Update user info
-            AuthService.instance.updateUserDisplayName(
-                userID: currentUserID,
-                displayName: submissionText) { success in
-                    if success {
-                        self.showSuccessAlert = true
-                    } else {
-                        //TODO: Error alert
-                    }
-            }
+            //TODO
+//            profileText = submissionText
+//            // Update stored data
+//            UserDefaults.standard.set(submissionText,
+//                                      forKey: CurrentUserDefaults.displayName)
+//            // Update all names on all posts from this user
+//            DataService.instance.updateDisplayNameOnPosts(userID: currentUserID,
+//                                                          displayName: submissionText)
+//            // Update user info
+//            AuthService.instance.updateUserDisplayName(
+//                userID: currentUserID,
+//                displayName: submissionText) { success in
+//                    if success {
+//                        self.showSuccessAlert = true
+//                    } else {
+//                        //TODO: Error alert
+//                    }
+//            }
             
             // FIXME: update posts that has been already fetched
+            break
         case .bio:
-            profileText = submissionText
-            // Update stored data
-            UserDefaults.standard.set(submissionText,
-                                      forKey: CurrentUserDefaults.bio)
-            // Update user info
-            AuthService.instance.updateUserBio(
-                userID: currentUserID,
-                bio: submissionText) { success in
-                    if success {
-                        self.showSuccessAlert = true
-                    } else {
-                        //TODO: Error alert
-                    }
-            }
+            //TODO
+//            profileText = submissionText
+//            // Update stored data
+//            UserDefaults.standard.set(submissionText,
+//                                      forKey: CurrentUserDefaults.bio)
+//            // Update user info
+//            AuthService.instance.updateUserBio(
+//                userID: currentUserID,
+//                bio: submissionText) { success in
+//                    if success {
+//                        self.showSuccessAlert = true
+//                    } else {
+//                        //TODO: Error alert
+//                    }
+//            }
             break
         }
     }
@@ -165,23 +201,15 @@ struct SettingsEditTextView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 SettingsEditTextView(
-                    title: "Edit Display Name",
-                    description: "Description",
-                    placeholder: "Place Holder",
-                    settingsEditTextOption: .displayName,
-                    profileText: $profileText
+                    textOption: .displayName
                 )
             }.preferredColorScheme(.light)
             NavigationView {
                 SettingsEditTextView(
-                    title: "Edit Display Name",
-                    description: "Description",
-                    placeholder: "Place Holder",
-                    settingsEditTextOption: .bio,
-                    profileText: $profileText
+                    textOption: .bio
                 )
             }
             .preferredColorScheme(.dark)
-        }
+        }.environmentObject(SettingsViewModel(appModule: AppModule()))
     }
 }

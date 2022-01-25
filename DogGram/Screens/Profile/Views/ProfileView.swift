@@ -12,11 +12,6 @@ struct ProfileView: View {
     @EnvironmentObject private var viewModel: ProfileViewModel
     @State private var showSettings: Bool = false
     
-    ///TODO: Remove these states.
-    @State var userDisplayName = ""
-    @State var userBio = ""
-    @State var userProfilePicture = UIImage(named: "logo.loading")!
-        
     var body: some View {
         ScrollView(
             .vertical,
@@ -48,12 +43,7 @@ struct ProfileView: View {
         .sheet(isPresented: $showSettings) {
             
         } content: {
-            SettingsView(
-                userDisplayName: $userDisplayName,
-                userBio: $userBio,
-                userProfilePicture: $userProfilePicture
-            )
-                .preferredColorScheme(colorScheme)
+            SettingsScreen()
         }
     }
 }

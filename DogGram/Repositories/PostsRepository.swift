@@ -102,7 +102,7 @@ actor PostsRepository {
                         likeCount: 0,
                         likedBy: [],
                         comments: [])
-        try document.setData(from: post)
+        try await document.setDataAsync(from: post)
         updateLocalCache(posts: [post])
         return post
     }
