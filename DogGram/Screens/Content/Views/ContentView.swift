@@ -25,7 +25,7 @@ struct ContentView: View {
                 Text("Feed")
             }
             NavigationView {
-                BrowseView(posts: browsePosts)
+                BrowseScreen()
             }
             .tabItem {
                 Image(systemName: "magnifyingglass")

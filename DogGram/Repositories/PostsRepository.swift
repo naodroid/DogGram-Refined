@@ -58,6 +58,12 @@ actor PostsRepository {
         ).limit(to: 50)
         return try await getPosts(with: query)
     }
+    func getPostsForBrowse() async throws -> [Post] {
+        let posts = try await getPostsForFeed()
+        return posts.shuffled()
+    }
+    
+    
     private func getPosts(with query: Query) async throws  -> [Post] {
         let snapshot = try await query.getDocuments()
         let posts = Post.decodeArray(from: snapshot)

@@ -8,48 +8,47 @@
 import SwiftUI
 
 struct CarouselView: View {
-    @State var selection: Int = 1
-    @State var timerAdded: Bool = false
-    private let imageCount = 8
+    @EnvironmentObject var viewModel: BrowseViewModel
     
     var body: some View {
-        TabView(selection: $selection) {
-            ForEach(1..<imageCount) {(i) in
-                Image("dog\(i)")
-                    .resizable()
-                    .scaledToFill()
-                    .tag(i)
+        if viewModel.postsForCarousel.isEmpty {
+            emptyView
+        } else {
+            tabView
+        }
+    }
+    private var emptyView: some View {
+        Text("Loading")
+    }
+    private var tabView: some View {
+        TabView(selection: $viewModel.carouselPosition) {
+            ForEach(viewModel.postsForCarousel, id: \.id) { post in
+                CarouselImage(
+                    post: post,
+                    image: viewModel.image(for: post)
+                )
             }
         }
         .tabViewStyle(PageTabViewStyle())
         .frame(height: 300)
         .animation(.default)
-        .onAppear {
-            if !timerAdded {
-                addTimer()
-            }
-        }
-    }
-    
-    //MARK: Functions
-    func addTimer() {
-        timerAdded = true
-        let timer = Timer.scheduledTimer(
-            withTimeInterval: 5.0,
-            repeats: true) { (_) in
-                if selection == imageCount {
-                    selection = 1
-                } else {
-                    selection += 1
-                }
-        }
-        timer.fire()
     }
 }
-
 struct CarouselView_Previews: PreviewProvider {
     static var previews: some View {
         CarouselView()
             .previewLayout(.sizeThatFits)
     }
 }
+private struct CarouselImage: View {
+    let post: Post
+    let image: UIImage
+    var body: some View {
+        Image(uiImage: image)
+            .resizable()
+            .scaledToFill()
+            .id(post.id ?? "")
+            .animation(nil)
+    }
+}
+

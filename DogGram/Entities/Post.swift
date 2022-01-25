@@ -46,4 +46,17 @@ struct Post: Codable, Hashable, Identifiable {
         }
     }
 }
+extension Array where Element == Post {
+    mutating func merge(_ posts: [Post]) {
+        for (index, p1) in self.enumerated() {
+            for p2 in posts {
+                if p1.id == p2.id {
+                    self[index] = p2
+                    break
+                }
+            }
+        }
+
+    }
+}
 

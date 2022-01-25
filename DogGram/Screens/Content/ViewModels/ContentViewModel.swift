@@ -14,6 +14,7 @@ final class ContentViewModel: ObservableObject, AppModuleUsing {
     let appModule: AppModule
     @Published private(set) var userLoggedIn = false
     private var cancellableList: [AnyCancellable] = []
+    
 
     // MARK: Initializer
     init(appModule: AppModule) {

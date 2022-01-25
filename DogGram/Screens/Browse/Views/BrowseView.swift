@@ -7,15 +7,14 @@
 
 import SwiftUI
 
+@MainActor
 struct BrowseView: View {
-    
-    var posts: PostArrayObject
+    @EnvironmentObject var viewModel: BrowseViewModel
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             CarouselView()
-            //TODO
-            ImageGridView(posts: [])
+            ImageGridView(posts: viewModel.postsForGrid)
         }
         .navigationTitle("Browse")
         .navigationBarTitleDisplayMode(.inline)
@@ -25,7 +24,8 @@ struct BrowseView: View {
 struct BrowseView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BrowseView(posts: PostArrayObject())
+            BrowseView()
+                .environmentObject(BrowseViewModel(appModule: AppModule()))
         }
     }
 }

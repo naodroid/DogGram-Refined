@@ -13,6 +13,8 @@
 		350A4691279B807400C846C6 /* PostImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A4690279B807400C846C6 /* PostImageViewModel.swift */; };
 		350A4694279BADAC00C846C6 /* ContentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A4693279BADAC00C846C6 /* ContentScreen.swift */; };
 		350A4698279BADDE00C846C6 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A4697279BADDE00C846C6 /* ContentViewModel.swift */; };
+		350A469B279E21C500C846C6 /* BrowseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A469A279E21C500C846C6 /* BrowseScreen.swift */; };
+		350A469F279E222900C846C6 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A469E279E222900C846C6 /* BrowseViewModel.swift */; };
 		351DE47F2769553200B75AB3 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */; };
 		3520E249277DBDE900AB7C3A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520E248277DBDE900AB7C3A /* DataService.swift */; };
 		3520E24B277FD53100AB7C3A /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520E24A277FD53100AB7C3A /* LazyView.swift */; };
@@ -94,6 +96,8 @@
 		350A4690279B807400C846C6 /* PostImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageViewModel.swift; sourceTree = "<group>"; };
 		350A4693279BADAC00C846C6 /* ContentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentScreen.swift; sourceTree = "<group>"; };
 		350A4697279BADDE00C846C6 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		350A469A279E21C500C846C6 /* BrowseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseScreen.swift; sourceTree = "<group>"; };
+		350A469E279E222900C846C6 /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
 		351DE47D276953A300B75AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		3520E248277DBDE900AB7C3A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -279,6 +283,32 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		350A4699279E218200C846C6 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				350A469C279E21CA00C846C6 /* Views */,
+				350A469D279E21CF00C846C6 /* ViewModels */,
+				350A469A279E21C500C846C6 /* BrowseScreen.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		350A469C279E21CA00C846C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35A33E2F274A160F005F29D5 /* BrowseView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		350A469D279E21CF00C846C6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				350A469E279E222900C846C6 /* BrowseViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		35232874276DA8750024E84D /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +460,7 @@
 		35882429278BBC4C00167C46 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				350A4699279E218200C846C6 /* Browse */,
 				350A4692279BADA100C846C6 /* Content */,
 				3578AD8A2796395400C17CBA /* Feed */,
 				3588242A278BBC5400167C46 /* OnBoarding */,
@@ -571,7 +602,6 @@
 		35A33E1327468922005F29D5 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				35A33E2F274A160F005F29D5 /* BrowseView.swift */,
 				35A33E232747DE25005F29D5 /* CommentsView.swift */,
 				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
 				35A33E37274A2423005F29D5 /* ImagePicker.swift */,
@@ -772,6 +802,7 @@
 				35A33E30274A160F005F29D5 /* BrowseView.swift in Sources */,
 				35A33E282747E193005F29D5 /* CommentModel.swift in Sources */,
 				3580C6DA27564B6400035AF0 /* SettingsEditImageView.swift in Sources */,
+				350A469F279E222900C846C6 /* BrowseViewModel.swift in Sources */,
 				35A33E242747DE25005F29D5 /* CommentsView.swift in Sources */,
 				356B9C67274E7A1A00543EF3 /* ProfileHeaderView.swift in Sources */,
 				35A33E36274A21A0005F29D5 /* UploadView.swift in Sources */,
@@ -795,6 +826,7 @@
 				350A4691279B807400C846C6 /* PostImageViewModel.swift in Sources */,
 				3578ADA92796C76900C17CBA /* AnyCancellable+Ext.swift in Sources */,
 				359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */,
+				350A469B279E21C500C846C6 /* BrowseScreen.swift in Sources */,
 				3520E249277DBDE900AB7C3A /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
