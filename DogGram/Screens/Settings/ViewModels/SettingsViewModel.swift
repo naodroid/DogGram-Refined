@@ -34,7 +34,9 @@ final class SettingsViewModel: ObservableObject, AppModuleUsing {
         }.store(in: &cancellableList)
         
         EventDispatcher.stream.sink { event in
-            self.on(event: event)
+            Task {
+                self.on(event: event)
+            }
         }.store(in: &cancellableList)
     }
     func onDisappear() {
@@ -44,9 +46,9 @@ final class SettingsViewModel: ObservableObject, AppModuleUsing {
     // MARK: Event Handling
     private func on(event: Event) {
         switch event {
-        case .onUserChanged(let userID):
+        case .onCurrentUserChanged(let user):
             Task {
-                self.user = await authRepository.currentUser
+                self.user = user
             }.store(in: &cancellableList)
         case .onPostsUpdated:
             break

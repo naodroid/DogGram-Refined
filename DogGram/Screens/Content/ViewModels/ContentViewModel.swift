@@ -38,8 +38,8 @@ final class ContentViewModel: ObservableObject, AppModuleUsing {
     // MARK: Event Handling
     private func on(event: Event) {
         switch event {
-        case .onUserChanged(let userID):
-            userLoggedIn = userID != nil
+        case .onCurrentUserChanged(let user):
+            userLoggedIn = user != nil
         case .onPostsUpdated:
             break
         }

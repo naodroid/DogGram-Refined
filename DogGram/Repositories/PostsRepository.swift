@@ -45,7 +45,7 @@ actor PostsRepository {
     /// get posts that has been posted by the user
     func getPostForUser(_ userID: String) async throws -> [Post] {
         let query = self.postsRef.whereField(
-                Post.Keys.userID.rawValue,
+                Post.CodingKeys.userID.rawValue,
                 isEqualTo: userID
             )
         return try await getPosts(with: query)
@@ -53,7 +53,7 @@ actor PostsRepository {
     /// get posts for feed
     func getPostsForFeed() async throws -> [Post] {
         let query = postsRef.order(
-            by: Post.Keys.dateCreated.rawValue,
+            by: Post.CodingKeys.dateCreated.rawValue,
             descending: true
         ).limit(to: 50)
         return try await getPosts(with: query)
@@ -113,61 +113,43 @@ actor PostsRepository {
     // MARK: Like/Unlike
     
     func like(post: Post) async throws {
-        guard let currentUserID = await authRepository.currentUserID else {
-            return
+        guard
+            let currentUserID = await authRepository.currentUserID,
+            let postID = post.id
+        else {
+            //TODO: Create custom error
+            throw NSError()
         }
 
         let data: [String: Any] = [
-            Post.Keys.likeCount.rawValue: FieldValue.increment(Int64(1)),
-            Post.Keys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
+            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
-        return try await withCheckedThrowingContinuation({ continuation in
-            guard let postID = post.id else {
-                continuation.resume(throwing: NSError())
-                return
-            }
-            postsRef.document(postID).updateData(data) { error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                continuation.resume(returning: ())
-                
-                var p = post
-                p.likedBy.append(currentUserID)
-                p.likeCount += 1
-                self.updateLocalCache(posts: [p])
-            }
-        })
+        try await postsRef.document(postID).updateData(data)
+        //update local cache
+        var p = post
+        p.likedBy.append(currentUserID)
+        p.likeCount += 1
+        self.updateLocalCache(posts: [p])
     }
     func unlike(post: Post) async throws {
         guard
             let currentUserID = await authRepository.currentUserID,
             let postID = post.id
         else {
-            return
+            //TODO: Create custom error
+            throw NSError()
         }
 
         let data: [String: Any] = [
-            Post.Keys.likeCount.rawValue: FieldValue.increment(Int64(1)),
-            Post.Keys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
+            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
         ]
-        return try await withCheckedThrowingContinuation({ continuation in
-            postsRef.document(postID).updateData(data) { error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                continuation.resume(returning: ())
-                
-                var p = post
-                p.likedBy = p.likedBy.filter {$0 != currentUserID}
-                p.likeCount = max(0, post.likeCount - 1)
-                self.updateLocalCache(posts: [p])
-            }
-        })
+        try await postsRef.document(postID).updateData(data)
+        //update local cache
+        var p = post
+        p.likedBy = p.likedBy.filter {$0 != currentUserID}
+        p.likeCount = max(0, post.likeCount - 1)
+        self.updateLocalCache(posts: [p])
     }
-    
-    
-    
 }

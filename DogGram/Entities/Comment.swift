@@ -11,22 +11,21 @@ import FirebaseFirestoreSwift
 
 
 struct Comment: Identifiable, Codable, Hashable {
-    let commentID: String
+    @DocumentID var id: String?
     let userID: String
     let displayName: String
     let content: String
     let dateCreated: Timestamp?
     let likeCount: Int
     let likedBy: [String] //listOfUserID
-    var id: String { commentID }
     
     enum Keys: String {
-        case commentID = "postId"
-        case userID = "userId"
-        case displayName = "displayName"
+        case id
+        case userID = "user_id"
+        case displayName = "display_name"
         case content = "content"
-        case dateCreated = "dateCreated"
-        case likeCount = "likeCount"
-        case likedBy = "likedBy"
+        case dateCreated = "date_created"
+        case likeCount = "like_count"
+        case likedBy = "liked_by"
     }
 }

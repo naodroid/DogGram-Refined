@@ -9,7 +9,7 @@ import Foundation
 
 
 enum Event {
-    case onUserChanged(userID: String?)
+    case onCurrentUserChanged(user: User?)
     case onPostsUpdated(posts: [Post])
 }
 // 

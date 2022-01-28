@@ -23,27 +23,27 @@ actor UsersRepository {
     }
     
     /// Create New User With passed information
+    /// - Parameters:
+    ///   - userID: The id from FirebaseAuth.user.id
     /// - Returns: Created UserID
     func createNewUser(
+        userID: String,
         name: String,
         email: String,
-        providerID: String,
         provider: String,
         profileImage: UIImage
     ) async throws -> User {
-        let document = usersRef.document()
-        let documentID = document.documentID
+        let document = usersRef.document(userID)
         
         try await imageRepository.uploadProfileImage(
-            userID: documentID,
+            userID: userID,
             image: profileImage
         )
         //set user data
         let user = User(
-            id: documentID,
+            id: userID,
             displayName: name,
             email: email,
-            providerId: providerID,
             provider: provider,
             bio: "",
             dateCreated: nil)
@@ -51,15 +51,12 @@ actor UsersRepository {
         return user
     }
     
-    /// returns user if exists. if not exists, retun nil
+    /// returns user if exists. if not exists, return nil
     /// - Parameter fromProviderID: providerID
-    func checkIfUserExists(fromProviderID providerID: String) async throws -> User? {
-        let documents = try await usersRef.whereField(
-            User.Keys.providerId.rawValue,
-            isEqualTo: providerID
-        ).getDocuments()
-        let users = User.decodeArray(from: documents)
-        return users.first
+    func checkIfUserExists(fromUserID userID: String) async throws -> User? {
+        let documents = try await usersRef.document(userID).getDocument()
+        let user = User.decode(from: documents)
+        return user
     }
     
     

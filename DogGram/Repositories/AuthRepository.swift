@@ -13,7 +13,7 @@ import FirebaseFirestore
 
 enum LoginResult {
     case existsUser(user: User)
-    case newUser(providerID: String, result: SignInResult)
+    case newUser(userID: String, result: SignInResult)
 }
 
 
@@ -30,7 +30,7 @@ actor AuthRepository {
 
     private let usersRepository: UsersRepository
     private let imagesRepository: ImagesRepository
-
+    private var authHandle: AuthStateDidChangeListenerHandle?
     
     private var cache: [String: Post] = [:]
     
@@ -46,10 +46,37 @@ actor AuthRepository {
         }
     }
     
+    
+    // MARK: Manage current user
+    private func listenState() {
+        authHandle = Auth.auth().addStateDidChangeListener {[weak self] auth, user in
+            guard let self = self else {
+                return
+            }
+            Task {
+                await self.onStateChanged(auth: auth, user: user)
+            }
+        }
+    }
+    private func onStateChanged(auth: Auth, user: FirebaseAuth.User?) {
+        guard let user = user else {
+            self.setCurrentUser(nil)
+            return
+        }
+        if user.uid == self.currentUser?.id {
+            //TODO: update info
+        } else {
+            //switch to new user
+            
+        }
+    }
+    
+    
+    
     private func setCurrentUser(_ user: User?) {
         self.currentUser = user
         DogGramStorage.currentUser = user
-        Event.onUserChanged(userID: user?.id).post()
+        Event.onCurrentUserChanged(user: user).post()
     }
     
     // MARK: Sign in with providers
@@ -67,16 +94,16 @@ actor AuthRepository {
     }
     private func commonSignIn(result: SignInResult) async throws -> LoginResult {
         let ret = try await Auth.auth().signIn(with: result.credential)
-        let providerID = ret.user.uid
+        let userID = ret.user.uid
         let user = try await usersRepository
-            .checkIfUserExists(fromProviderID: providerID)
+            .checkIfUserExists(fromUserID: userID)
         if let user = user {
             //existing user
             setCurrentUser(user)
             return LoginResult.existsUser(user: user)
         } else {
             //new user
-            return LoginResult.newUser(providerID: providerID, result: result)
+            return LoginResult.newUser(userID: userID, result: result)
         }
     }
     
@@ -93,16 +120,16 @@ actor AuthRepository {
     // MARK: Create
     /// Create user to database, return the created user
     func createNewUser(
+        userID: String,
         name: String,
         email: String,
-        providerID: String,
         provider: String,
         profileImage: UIImage
     ) async throws -> User {
         let user = try await usersRepository.createNewUser(
+            userID: userID,
             name: name,
             email: email,
-            providerID: providerID,
             provider: provider,
             profileImage: profileImage
         )
@@ -115,7 +142,7 @@ actor AuthRepository {
                 bio: String? = nil) async throws -> User? {
         guard
             var user = currentUser,
-            let id = user.id
+            user.id != nil
         else {
             return currentUser
         }

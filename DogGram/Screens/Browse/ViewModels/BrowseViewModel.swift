@@ -31,7 +31,9 @@ final class BrowseViewModel: ObservableObject, AppModuleUsing {
             do {
                 let posts = try await postsRepository.getPostsForBrowse()
                 let carouselNum = min(posts.count / 2, 7)
-                self.postsForCarousel = Array(posts[0...carouselNum])
+                if carouselNum > 0 {
+                    self.postsForCarousel = Array(posts[0...carouselNum])
+                }
                 self.postsForGrid = Array(posts[carouselNum...])
                 self.fetchCarouselImages()
             } catch {
@@ -71,7 +73,7 @@ final class BrowseViewModel: ObservableObject, AppModuleUsing {
     // MARK: Event Handling
     private func on(event: Event) {
         switch event {
-        case .onUserChanged:
+        case .onCurrentUserChanged:
             break
         case .onPostsUpdated(let posts):
             self.postsForCarousel.merge(posts)

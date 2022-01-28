@@ -14,18 +14,17 @@ struct User: Codable, Identifiable {
     @DocumentID var id: String?
     var displayName: String
     var email: String
-    var providerId: String
     var provider: String
     var bio: String
     @ServerTimestamp var dateCreated: Timestamp?
     
-    enum Keys: String {
-        case displayName = "displayName"
+    enum CodingKeys: String, CodingKey {
+        case id
+        case displayName = "display_name"
         case email = "email"
-        case providerId = "providerId"
         case provider = "provider"
         case bio = "bio"
-        case dateCreated = "dateCreated"
+        case dateCreated = "date_created"
     }
     
     static func decode(from document: DocumentSnapshot) -> User? {

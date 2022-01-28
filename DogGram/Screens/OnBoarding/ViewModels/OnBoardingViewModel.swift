@@ -15,7 +15,7 @@ final class OnBoardingViewModel: ObservableObject {
     
     @Published var displayName: String = ""
     @Published var email: String = ""
-    @Published private(set) var providerID: String?
+    @Published private(set) var userID: String?
     @Published private(set) var provider: String?
     @Published var imageSelected: UIImage = UIImage(named: "logo")!
     @Published var showError: Bool = false
@@ -55,11 +55,11 @@ final class OnBoardingViewModel: ObservableObject {
                 switch result {
                 case .existsUser(_):
                     self.dismiss = true
-                case .newUser(let providerID, let result):
+                case .newUser(let userID, let result):
+                    self.userID = userID
                     self.email = result.email
                     self.displayName = result.name
                     self.provider = result.provider
-                    self.providerID = providerID
                     self.showOnBoardingPart2 = true
                 }
             } catch {
@@ -70,7 +70,7 @@ final class OnBoardingViewModel: ObservableObject {
     func signUpAsAnonymous() {
         Task {
             do {
-                self.providerID = try await authRepository.signUpAsAnonymous()
+                self.userID = try await authRepository.signUpAsAnonymous()
                 self.email = ""
                 self.displayName = ""
                 self.provider = "anonymous"
@@ -82,16 +82,16 @@ final class OnBoardingViewModel: ObservableObject {
     
     // MARK: Create user (for OnBoardingPart2)
     func createProfile() {
-        guard let provider = provider, let providerID = providerID else {
+        guard let provider = provider, let userID = userID else {
             print("Need to login/signup first")
             return
         }
         Task {
             do {
                 let _ = try await authRepository.createNewUser(
+                    userID: userID,
                     name: displayName,
                     email: email,
-                    providerID: providerID,
                     provider: provider,
                     profileImage: imageSelected
                 )

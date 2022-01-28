@@ -50,8 +50,8 @@ final class UploadViewModel: ObservableObject, AppModuleUsing {
     }
     private func on(event: Event) {
         switch event {
-        case .onUserChanged(let userID):
-            currentUserID = userID
+        case .onCurrentUserChanged(let user):
+            currentUserID = user?.id
         case .onPostsUpdated:
             break
         }

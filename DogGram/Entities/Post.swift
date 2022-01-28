@@ -19,14 +19,15 @@ struct Post: Codable, Hashable, Identifiable {
     var likedBy: [String]
     var comments: [Comment]
     
-    enum Keys: String {
-        case userID = "userId"
-        case displayName = "displayName"
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case displayName = "display_name"
         case caption = "caption"
-        case likeCount = "likeCount"
-        case likedBy = "likedBy"
+        case likeCount = "like_count"
+        case likedBy = "liked_by"
         case comments = "comments"
-        case dateCreated = "dateCreated"
+        case dateCreated = "date_created"
     }
     
     static func decode(from document: DocumentSnapshot) -> Post? {

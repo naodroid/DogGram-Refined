@@ -31,14 +31,14 @@ struct StoredValue<T> {
 }
 
 struct DogGramStorage {
+    // This id doesn't need to be stored in defaults.
+    // Use firebase instead.
     @StoredValue(key: "userID", defaultValue: nil)
     static var userID: String?
     @StoredValue(key: "userDisplayName", defaultValue: nil)
     static var userDisplayName: String?
     @StoredValue(key: "userEmail", defaultValue: nil)
     static var userEmail: String?
-    @StoredValue(key: "userProviderId", defaultValue: nil)
-    static var userProviderId: String?
     @StoredValue(key: "userProvider", defaultValue: nil)
     static var userProvider: String?
     @StoredValue(key: "userBio", defaultValue: nil)
@@ -54,7 +54,6 @@ struct DogGramStorage {
                 let id = self.userID,
                 let displayName = self.userDisplayName,
                 let email = self.userEmail,
-                let providerId = self.userProviderId,
                 let provider = self.userProvider,
                 let bio = self.userBio else {
                     return nil
@@ -65,7 +64,6 @@ struct DogGramStorage {
                 id: id,
                 displayName: displayName,
                 email: email,
-                providerId: providerId,
                 provider: provider,
                 bio: bio,
                 dateCreated: timestamp
@@ -76,7 +74,6 @@ struct DogGramStorage {
                 self.userID = nil
                 self.userDisplayName = nil
                 self.userEmail = nil
-                self.userProviderId = nil
                 self.userProvider = nil
                 self.userBio = nil
                 self.userDateCreated = nil
@@ -85,7 +82,6 @@ struct DogGramStorage {
             self.userID = user.id
             self.userDisplayName = user.displayName
             self.userEmail = user.email
-            self.userProviderId = user.providerId
             self.userProvider = user.provider
             self.userBio = user.bio
             self.userDateCreated = user.dateCreated?.dateValue()
