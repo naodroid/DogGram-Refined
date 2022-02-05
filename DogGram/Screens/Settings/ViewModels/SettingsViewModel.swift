@@ -56,7 +56,18 @@ final class SettingsViewModel: ObservableObject, AppModuleUsing {
     }
     
     // MARK: Profile
-    func update(displayName: String) {
-        
+    func update(displayName: String? = nil, bio: String? = nil) {
+        if displayName == nil && bio == nil {
+            return
+        }
+        Task {
+            do {
+                _ = try await authRepository.update(displayName: displayName, bio: bio)
+                showEditingFinishedAlert = true
+                print("FINISHED")
+            } catch {
+                print("ERROR \(error)")
+            }
+        }.store(in: &cancellableList)
     }
 }

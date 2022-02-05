@@ -48,15 +48,6 @@ struct SettingsEditTextView: View {
     
     init(textOption: SettingsEditTextOption) {
         self.textOption = textOption
-        let initialText: String
-        switch textOption {
-        case .displayName:
-            initialText = viewModel.user?.displayName ?? ""
-        case .bio:
-            initialText = viewModel.user?.bio ?? ""
-        }
-        
-        self._submissionText = State(wrappedValue: initialText)
     }
 
     let haptics = UINotificationFeedbackGenerator()
@@ -113,6 +104,16 @@ struct SettingsEditTextView: View {
                   )
             )
         }
+        .onAppear {
+            let initialText: String
+            switch textOption {
+            case .displayName:
+                initialText = viewModel.user?.displayName ?? ""
+            case .bio:
+                initialText = viewModel.user?.bio ?? ""
+            }
+            self.submissionText = initialText
+        }
         
     }
     
@@ -146,50 +147,15 @@ struct SettingsEditTextView: View {
     }
     func saveText() {
         guard textIsAppropriate(),
-              let currentUserID = viewModel.user?.id
+              viewModel.user?.id != nil
         else {
             return
         }
         switch textOption {
         case .displayName:
-            //TODO
-//            profileText = submissionText
-//            // Update stored data
-//            UserDefaults.standard.set(submissionText,
-//                                      forKey: CurrentUserDefaults.displayName)
-//            // Update all names on all posts from this user
-//            DataService.instance.updateDisplayNameOnPosts(userID: currentUserID,
-//                                                          displayName: submissionText)
-//            // Update user info
-//            AuthService.instance.updateUserDisplayName(
-//                userID: currentUserID,
-//                displayName: submissionText) { success in
-//                    if success {
-//                        self.showSuccessAlert = true
-//                    } else {
-//                        //TODO: Error alert
-//                    }
-//            }
-            
-            // FIXME: update posts that has been already fetched
-            break
+            viewModel.update(displayName: submissionText)
         case .bio:
-            //TODO
-//            profileText = submissionText
-//            // Update stored data
-//            UserDefaults.standard.set(submissionText,
-//                                      forKey: CurrentUserDefaults.bio)
-//            // Update user info
-//            AuthService.instance.updateUserBio(
-//                userID: currentUserID,
-//                bio: submissionText) { success in
-//                    if success {
-//                        self.showSuccessAlert = true
-//                    } else {
-//                        //TODO: Error alert
-//                    }
-//            }
-            break
+            viewModel.update(bio: submissionText)
         }
     }
 
