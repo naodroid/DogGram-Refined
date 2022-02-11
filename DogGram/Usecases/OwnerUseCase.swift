@@ -99,12 +99,12 @@ class OwnerUseCaseImpl: OwnerUseCase, RepositoryModuleUsing {
         provider: String,
         profileImage: UIImage
     ) async throws -> User {
+        try await imagesRepository.uploadProfileImage(userID: userID, image: profileImage)
         let user = try await usersRepository.createNewUser(
             userID: userID,
             name: name,
             email: email,
-            provider: provider,
-            profileImage: profileImage
+            provider: provider
         )
         await authRepository.setCurrentUser(user)
         return user

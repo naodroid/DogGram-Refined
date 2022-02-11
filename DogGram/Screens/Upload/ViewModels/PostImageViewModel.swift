@@ -18,7 +18,7 @@ enum PostImageAlertType {
 }
 
 @MainActor
-final class PostImageViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
+final class PostImageViewModel: ObservableObject, UseCasesModuleUsing {
     //
     let imageSelected: UIImage
     let appModule: AppModule

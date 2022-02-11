@@ -15,39 +15,18 @@ import FirebaseFirestoreSwift
 actor PostsRepository {
     private static let firestore = Firestore.firestore()
     private let postsRef = PostsRepository.firestore.collection("posts")
-    
-    private let authRepository: AuthRepository
-    private let usersRepository: UsersRepository
-    private let imagesRepository: ImagesRepository
-
-    
     private var cache: [String: Post] = [:]
     
-    
-    nonisolated init(authRepository: AuthRepository,
-                     usersRepository: UsersRepository,
-                     imagesRepository: ImagesRepository) {
-        self.authRepository = authRepository
-        self.usersRepository = usersRepository
-        self.imagesRepository = imagesRepository
+    nonisolated init() {
     }
-    
     
     // MARK: GET posts
-    // To keep the post latest-info, listen Event.onPostsUpdated
-    /// get owner's posts
-    func getMyPosts() async throws -> [Post] {
-        guard let currentUserID = await authRepository.currentUserID else {
-            return []
-        }
-        return try await getPostsForUser(currentUserID)
-    }
     /// get posts that has been posted by the user
     func getPostsForUser(_ userID: String) async throws -> [Post] {
         let query = self.postsRef.whereField(
-                Post.CodingKeys.userID.rawValue,
-                isEqualTo: userID
-            )
+            Post.CodingKeys.userID.rawValue,
+            isEqualTo: userID
+        )
         return try await getPosts(with: query)
     }
     /// get posts for feed
@@ -108,21 +87,18 @@ actor PostsRepository {
     func deletePost(id: String) async throws {
         try await postsRef.document(id).delete()
     }
-
+    
     
     
     //--------------------------------------------
     // MARK: Like/Unlike
     
-    func like(post: Post) async throws {
-        guard
-            let currentUserID = await authRepository.currentUserID,
-            let postID = post.id
-        else {
+    func like(currentUserID: String, post: Post) async throws {
+        guard let postID = post.id else {
             //TODO: Create custom error
             throw NSError()
         }
-
+        
         let data: [String: Any] = [
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
@@ -134,15 +110,12 @@ actor PostsRepository {
         p.likeCount += 1
         self.updateLocalCache(posts: [p])
     }
-    func unlike(post: Post) async throws {
-        guard
-            let currentUserID = await authRepository.currentUserID,
-            let postID = post.id
-        else {
+    func unlike(currentUserID: String, post: Post) async throws {
+        guard let postID = post.id else {
             //TODO: Create custom error
             throw NSError()
         }
-
+        
         let data: [String: Any] = [
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([currentUserID])
@@ -153,5 +126,86 @@ actor PostsRepository {
         p.likedBy = p.likedBy.filter {$0 != currentUserID}
         p.likeCount = max(0, post.likeCount - 1)
         self.updateLocalCache(posts: [p])
+    }
+    
+    
+    // MARK: Comments
+    func getComments(postID: String) async throws -> [Comment] {
+        let docs = try await postsRef.document(postID)
+            .collection(Post.CodingKeys.comments.rawValue)
+            .order(by: Comment.CodingKeys.dateCreated.rawValue, descending: true)
+            .getDocuments()
+        //TODO: merge comments to cached-posts
+        return Comment.decodeArray(from: docs)
+    }
+    func postComment(postID: String,
+                     content: String,
+                     displayName: String,
+                     userID: String) async throws -> Comment {
+        let document = postsRef.document(postID)
+            .collection(Post.CodingKeys.comments.rawValue)
+            .document()
+        
+        let comment = Comment(id: document.documentID,
+                              userID: userID,
+                              displayName: displayName,
+                              content: content,
+                              dateCreated: nil,
+                              likeCount: 0,
+                              likedBy: [])
+        try await document.setDataAsync(from: comment)
+        //TODO: updateLocalCache(posts: [post])
+        return comment
+    }
+    func delete(comment: Comment,
+                in post: Post) async throws {
+        guard
+            let commentID = comment.id,
+            let postID = post.id
+        else {
+            throw NSError()
+        }
+        try await postsRef.document(postID)
+            .collection(Post.CodingKeys.comments.rawValue)
+            .document()
+            .delete()
+    }
+    
+    //MARK: Like comment
+    func like(comment: Comment,
+              in post: Post,
+              userID: String) async throws {
+        guard
+            let commentID = comment.id,
+            let postID = post.id
+        else {
+            throw NSError()
+        }
+        let data: [String: Any] = [
+            Comment.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1)),
+            Comment.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([userID])
+        ]
+        let comment = postsRef.document(postID)
+            .collection(Post.CodingKeys.comments.rawValue)
+            .document(commentID)
+        try await comment.updateData(data)
+    }
+    func unlike(comment: Comment,
+                in post: Post,
+                userID: String) async throws {
+        guard
+            let commentID = comment.id,
+            let postID = post.id
+        else {
+            throw NSError()
+        }
+        let data: [String: Any] = [
+            Comment.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1)),
+            Comment.CodingKeys.likedBy.rawValue: FieldValue.arrayRemove([userID])
+        ]
+        let comment = postsRef.document(postID)
+            .collection(Post.CodingKeys.comments.rawValue)
+            .document(commentID)
+        try await comment.updateData(data)
     }
 }

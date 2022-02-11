@@ -11,15 +11,26 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+protocol UsersRepository {
+    func createNewUser(userID: String,
+                       name: String,
+                       email: String,
+                       provider: String) async throws -> User
+    
+    func checkIfUserExists(fromUserID userID: String) async throws -> User?
+
+    // Profile
+    func getProfile(for userID: String) async throws -> User
+    func updateProfile(for user: User) async throws
+}
 
 /// Repository for users
-actor UsersRepository {
+actor UsersRepositoryImpl: UsersRepository {
     private static let firestore = Firestore.firestore()
-    private let usersRef = UsersRepository.firestore.collection("users")
-    private let imageRepository: ImagesRepository!
+    private let usersRef = UsersRepositoryImpl.firestore.collection("users")
+    
     ///
-    nonisolated init(imageRepository: ImagesRepository) {
-        self.imageRepository = imageRepository
+    nonisolated init() {
     }
     
     /// Create New User With passed information
@@ -30,15 +41,9 @@ actor UsersRepository {
         userID: String,
         name: String,
         email: String,
-        provider: String,
-        profileImage: UIImage
+        provider: String
     ) async throws -> User {
         let document = usersRef.document(userID)
-        
-        try await imageRepository.uploadProfileImage(
-            userID: userID,
-            image: profileImage
-        )
         //set user data
         let user = User(
             id: userID,
@@ -74,7 +79,6 @@ actor UsersRepository {
     // MARK: Update
     func updateProfile(for user: User) async throws {
         guard let id = user.id else {
-            //TODO: create custom error
             throw NSError(domain: "Invalid user", code: -1, userInfo: nil)
         }
         try await usersRef.document(id).setDataAsync(from: user)

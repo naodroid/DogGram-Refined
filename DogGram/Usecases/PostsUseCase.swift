@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// usecase related to post-list
 protocol PostsUseCase {
@@ -13,6 +14,8 @@ protocol PostsUseCase {
     func getPostsForUser(_ userID: String) async throws -> [Post]
     func getPostsForFeed() async throws -> [Post]
     func getPostsForBrowse() async throws -> [Post]
+    
+    func getImage(for post: Post) async throws -> UIImage
 }
 
 class PostsUseCaseImpl: PostsUseCase, RepositoryModuleUsing {
@@ -40,6 +43,14 @@ class PostsUseCaseImpl: PostsUseCase, RepositoryModuleUsing {
     func getPostsForBrowse() async throws -> [Post] {
         return try await postsRepository.getPostsForBrowse()
     }
+    
+    func getImage(for post: Post) async throws -> UIImage {
+        guard let postID = post.id else {
+            throw NSError()
+        }
+        return try await imagesRepository.downloadPostImage(postID: postID)
+    }
 }
+
 
 

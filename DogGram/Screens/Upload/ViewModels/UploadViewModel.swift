@@ -11,7 +11,7 @@ import Combine
 
 
 @MainActor
-final class UploadViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
+final class UploadViewModel: ObservableObject, UseCasesModuleUsing {
     @Published var currentUserID: String?
     @Published var imageSelected: UIImage = UIImage(named: "logo")!
     @Published var sourceType: UIImagePickerController.SourceType?

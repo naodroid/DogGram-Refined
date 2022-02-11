@@ -62,6 +62,10 @@
 		35A0C7DA27B5141100EDDBB9 /* OwnerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */; };
 		35A0C7DC27B5195700EDDBB9 /* PostsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */; };
 		35A0C7DE27B51B4000EDDBB9 /* UploadPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */; };
+		35A0C7E027B5E25500EDDBB9 /* LikeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7DF27B5E25500EDDBB9 /* LikeUseCase.swift */; };
+		35A0C7E327B5F7B300EDDBB9 /* CommentsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7E227B5F7B300EDDBB9 /* CommentsScreen.swift */; };
+		35A0C7E727B5F7CD00EDDBB9 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7E627B5F7CD00EDDBB9 /* CommentsViewModel.swift */; };
+		35A0C7E927B5F82300EDDBB9 /* CommentsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7E827B5F82300EDDBB9 /* CommentsUseCase.swift */; };
 		35A33E03274677CD005F29D5 /* DogGramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E02274677CD005F29D5 /* DogGramApp.swift */; };
 		35A33E05274677CD005F29D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E04274677CD005F29D5 /* ContentView.swift */; };
 		35A33E07274677CD005F29D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35A33E06274677CD005F29D5 /* Assets.xcassets */; };
@@ -180,6 +184,10 @@
 		35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerUseCase.swift; sourceTree = "<group>"; };
 		35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsUseCase.swift; sourceTree = "<group>"; };
 		35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostUseCase.swift; sourceTree = "<group>"; };
+		35A0C7DF27B5E25500EDDBB9 /* LikeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUseCase.swift; sourceTree = "<group>"; };
+		35A0C7E227B5F7B300EDDBB9 /* CommentsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsScreen.swift; sourceTree = "<group>"; };
+		35A0C7E627B5F7CD00EDDBB9 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		35A0C7E827B5F82300EDDBB9 /* CommentsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsUseCase.swift; sourceTree = "<group>"; };
 		35A33DFF274677CD005F29D5 /* DogGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35A33E02274677CD005F29D5 /* DogGramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogGramApp.swift; sourceTree = "<group>"; };
 		35A33E04274677CD005F29D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -481,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				350A4699279E218200C846C6 /* Browse */,
+				35A0C7E127B5F7A200EDDBB9 /* Comments */,
 				350A4692279BADA100C846C6 /* Content */,
 				3578AD8A2796395400C17CBA /* Feed */,
 				3588242A278BBC5400167C46 /* OnBoarding */,
@@ -563,6 +572,33 @@
 			path = Module;
 			sourceTree = "<group>";
 		};
+		35A0C7E127B5F7A200EDDBB9 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				35A0C7E427B5F7B800EDDBB9 /* Views */,
+				35A0C7E527B5F7BD00EDDBB9 /* ViewModels */,
+				35A0C7E227B5F7B300EDDBB9 /* CommentsScreen.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		35A0C7E427B5F7B800EDDBB9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35A33E232747DE25005F29D5 /* CommentsView.swift */,
+				35A33E252747E060005F29D5 /* MessageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35A0C7E527B5F7BD00EDDBB9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				35A0C7E627B5F7CD00EDDBB9 /* CommentsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		35A33DF6274677CD005F29D5 = {
 			isa = PBXGroup;
 			children = (
@@ -626,7 +662,6 @@
 		35A33E1327468922005F29D5 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				35A33E232747DE25005F29D5 /* CommentsView.swift */,
 				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
 				35A33E37274A2423005F29D5 /* ImagePicker.swift */,
 			);
@@ -640,7 +675,6 @@
 				3520E24A277FD53100AB7C3A /* LazyView.swift */,
 				35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */,
 				359EB71E27890FFC004B3EA2 /* LoggedInGuard.swift */,
-				35A33E252747E060005F29D5 /* MessageView.swift */,
 				356B9C66274E7A1A00543EF3 /* ProfileHeaderView.swift */,
 				3580C6D3275514D800035AF0 /* SettingsLabelView.swift */,
 				3580C6D527563F0900035AF0 /* SettingsRowView.swift */,
@@ -675,7 +709,9 @@
 				35CD97BE27AE07F0008BE8D4 /* UsersUseCase.swift */,
 				35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */,
 				35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */,
+				35A0C7DF27B5E25500EDDBB9 /* LikeUseCase.swift */,
 				35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */,
+				35A0C7E827B5F82300EDDBB9 /* CommentsUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -815,6 +851,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35A0C7E927B5F82300EDDBB9 /* CommentsUseCase.swift in Sources */,
 				35882430278BC56300167C46 /* SignInResult.swift in Sources */,
 				353CC7B027927DE300417E8E /* Task+Ext.swift in Sources */,
 				35CD97BD27AE0767008BE8D4 /* UseCasesModule.swift in Sources */,
@@ -827,6 +864,7 @@
 				359EB71B27847FA8004B3EA2 /* AnalyticsService.swift in Sources */,
 				35B28D46275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift in Sources */,
 				35882437278BCC5800167C46 /* Events.swift in Sources */,
+				35A0C7E727B5F7CD00EDDBB9 /* CommentsViewModel.swift in Sources */,
 				35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */,
 				35A33E202747D884005F29D5 /* PostModel.swift in Sources */,
 				3580C6D4275514D800035AF0 /* SettingsLabelView.swift in Sources */,
@@ -847,6 +885,7 @@
 				359EB737278AA207004B3EA2 /* ImagesRepository.swift in Sources */,
 				350A468B279B7B8A00C846C6 /* UploadScreen.swift in Sources */,
 				35A33E1727468B9D005F29D5 /* Extensions.swift in Sources */,
+				35A0C7E327B5F7B300EDDBB9 /* CommentsScreen.swift in Sources */,
 				353CC7A7279271E700417E8E /* PostViewModel.swift in Sources */,
 				3520E24B277FD53100AB7C3A /* LazyView.swift in Sources */,
 				359EB728278A8798004B3EA2 /* DogGramStorage.swift in Sources */,
@@ -887,6 +926,7 @@
 				35EF9A2B278CFE9500E12E2A /* ProfileScreen.swift in Sources */,
 				3580C6D627563F0900035AF0 /* SettingsRowView.swift in Sources */,
 				35882428278BBBBE00167C46 /* OnBoardingViewModel.swift in Sources */,
+				35A0C7E027B5E25500EDDBB9 /* LikeUseCase.swift in Sources */,
 				350A4691279B807400C846C6 /* PostImageViewModel.swift in Sources */,
 				3578ADA92796C76900C17CBA /* AnyCancellable+Ext.swift in Sources */,
 				359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */,

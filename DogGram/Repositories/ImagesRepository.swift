@@ -10,7 +10,24 @@ import FirebaseStorage
 import UIKit
 
 
-actor ImagesRepository {
+protocol ImagesRepository {
+    // Profile
+    func uploadProfileImage(userID: String,
+                            image: UIImage) async throws
+    func downloadProfileImage(userID: String) async throws -> UIImage
+    func deleteProfileImage(userID: String) async throws
+
+    //Post
+    func uploadPostImage(postID: String,
+                         image: UIImage) async throws
+    /// Download the image of the post
+    /// When failed, an error will be thrown
+    func downloadPostImage(postID: String) async throws -> UIImage
+    /// Delete the image of the post
+    func deletePostImage(postID: String) async throws
+}
+
+actor ImagesRepositoryImpl: ImagesRepository {
     
     private let imageCache = NSCache<AnyObject, UIImage>()
     private var storage = Storage.storage()

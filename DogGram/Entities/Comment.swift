@@ -19,7 +19,7 @@ struct Comment: Identifiable, Codable, Hashable {
     let likeCount: Int
     let likedBy: [String] //listOfUserID
     
-    enum Keys: String {
+    enum CodingKeys: String, CodingKey {
         case id
         case userID = "user_id"
         case displayName = "display_name"
@@ -28,4 +28,22 @@ struct Comment: Identifiable, Codable, Hashable {
         case likeCount = "like_count"
         case likedBy = "liked_by"
     }
+    
+    static func decode(from document: DocumentSnapshot) -> Comment? {
+        do {
+            return try document.data(as: Comment.self)
+        } catch {
+            print("Post Decoding Error: \(error)")
+            return nil
+        }
+    }
+    static func decodeArray(from snapshot: QuerySnapshot?) -> [Comment] {
+        guard let documents = snapshot?.documents else {
+            return []
+        }
+        return documents.compactMap { s in
+            return decode(from: s)
+        }
+    }
+
 }

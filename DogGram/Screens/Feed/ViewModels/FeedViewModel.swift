@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class FeedViewModel: ObservableObject, AppModuleUsing {
+final class FeedViewModel: ObservableObject, UseCasesModuleUsing {
     @Published private(set) var posts: [Post] = []
     let appModule: AppModule
     private var cancellable: AnyCancellable?
@@ -24,7 +24,7 @@ final class FeedViewModel: ObservableObject, AppModuleUsing {
         Task {
             do {
                 print("FETCH")
-                self.posts = try await self.postsRepository.getPostsForFeed()
+                self.posts = try await postsUseCase.getPostsForFeed()
                 print("FETCHED:\(self.posts.count)")
             } catch {
                 //TODO: Error handling

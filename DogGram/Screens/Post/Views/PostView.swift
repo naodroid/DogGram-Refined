@@ -82,16 +82,9 @@ struct PostView: View {
                     .accentColor(viewModel.likedByUser ? Color.red : Color.primary)
                     
                     NavigationLink(
-                        //TODO: Change comment
-                        destination: CommentsView(post:
-                                                    PostModel(postID: "",
-                                                              userID: "",
-                                                              username: "",
-                                                              dateCreated: Date(),
-                                                              likeCount: 0,
-                                                              likedByUser: false
-                                                             )
-                                                 )
+                        destination: {
+                            CommentsScreen(post: viewModel.post)
+                        }
                     ) {
                         Image(systemName: "bubble.middle.bottom")
                             .font(.title3)

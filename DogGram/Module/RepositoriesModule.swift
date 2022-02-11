@@ -8,16 +8,10 @@
 import Foundation
 
 class RepositoriesModule {
-    lazy var imagesRepository: ImagesRepository = ImagesRepository()
-    lazy var usersRepository: UsersRepository = UsersRepository(
-        imageRepository: imagesRepository
-    )
+    lazy var imagesRepository: ImagesRepository = ImagesRepositoryImpl()
+    lazy var usersRepository: UsersRepository = UsersRepositoryImpl()
     lazy var authRepository: AuthRepository = AuthRepository()
-    lazy var postsRepository: PostsRepository = PostsRepository(
-        authRepository: authRepository,
-        usersRepository: usersRepository,
-        imagesRepository: imagesRepository
-    )
+    lazy var postsRepository: PostsRepository = PostsRepository()
 }
 
 protocol RepositoryModuleUsing {

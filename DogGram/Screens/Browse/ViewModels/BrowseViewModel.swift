@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class BrowseViewModel: ObservableObject, AppModuleUsing {
+final class BrowseViewModel: ObservableObject, UseCasesModuleUsing {
     let appModule: AppModule
     //
     @Published private(set) var postsForCarousel: [Post] = []
@@ -29,7 +29,7 @@ final class BrowseViewModel: ObservableObject, AppModuleUsing {
     func onAppear() {
         Task {
             do {
-                let posts = try await postsRepository.getPostsForBrowse()
+                let posts = try await postsUseCase.getPostsForBrowse()
                 let carouselNum = min(posts.count / 2, 7)
                 if carouselNum > 0 {
                     self.postsForCarousel = Array(posts[0...carouselNum])
@@ -93,12 +93,12 @@ final class BrowseViewModel: ObservableObject, AppModuleUsing {
     }
     private func fetchCarouselImages() {
         for p in postsForCarousel {
-            guard let id = p.id, !id.isEmpty else {
+            guard let id = p.id else {
                 continue
             }
             Task {
                 do {
-                    let image = try await imagesRepository.downloadPostImage(postID: id)
+                    let image = try await postsUseCase.getImage(for: p)
                     imagesForPosts[id] = image
                     //update views
                     objectWillChange.send()

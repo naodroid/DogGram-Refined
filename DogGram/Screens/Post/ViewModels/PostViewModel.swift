@@ -17,7 +17,7 @@ enum PostActionSheetOption {
 
 
 @MainActor
-final class PostViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
+final class PostViewModel: ObservableObject, UseCasesModuleUsing {
     //
     private(set) var currentUserID: String?
     private var imageFetched = false
@@ -81,12 +81,9 @@ final class PostViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing
             currentUserID = await ownerUseCase.currentUserID
             if !imageFetched {
                 do {
-                    guard let postID = post.id else {
-                        return
-                    }
-                    postImage = try await imagesRepository.downloadPostImage(postID: postID)
+                    postImage = try await postsUseCase.getImage(for: post)
                     if let uid = currentUserID {
-                        profileImage = try await imagesRepository.downloadProfileImage(userID: uid)
+                        profileImage = try await usersUseCase.getProfileImage(for: uid)
                     }
                     imageFetched = true
                 } catch {
@@ -183,7 +180,7 @@ final class PostViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing
         }
         // Update the local data
         do {
-            try await postsRepository.like(post: post)
+            try await likeUseCase.like(post: post)
             // Animate UI
             animateLike = true
             await asyncSleep(for: 0.5)
@@ -204,7 +201,7 @@ final class PostViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing
         }
         //
         do {
-            try await postsRepository.unlike(post: post)
+            try await likeUseCase.unlike(post: post)
             // Animate UI
             animateUnlike = true
             await asyncSleep(for: 0.5)
