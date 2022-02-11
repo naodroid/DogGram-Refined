@@ -36,14 +36,14 @@ actor PostsRepository {
     // MARK: GET posts
     // To keep the post latest-info, listen Event.onPostsUpdated
     /// get owner's posts
-    func getMyPostIDs() async throws -> [Post] {
+    func getMyPosts() async throws -> [Post] {
         guard let currentUserID = await authRepository.currentUserID else {
             return []
         }
-        return try await getPostForUser(currentUserID)
+        return try await getPostsForUser(currentUserID)
     }
     /// get posts that has been posted by the user
-    func getPostForUser(_ userID: String) async throws -> [Post] {
+    func getPostsForUser(_ userID: String) async throws -> [Post] {
         let query = self.postsRef.whereField(
                 Post.CodingKeys.userID.rawValue,
                 isEqualTo: userID
@@ -83,18 +83,17 @@ actor PostsRepository {
         return ids.compactMap { cache[$0] }
     }
     
+    
+    
     // MARK: Upload Post
     @discardableResult
-    func uploadPost(image: UIImage,
-                    caption: String?,
+    func createPost(caption: String?,
                     displayName: String,
                     userID: String) async throws -> Post {
         // Create new post document
         let document = postsRef.document()
         let documentID = document.documentID
         
-        // Upload image to storage
-        try await imagesRepository.uploadPostImage(postID: documentID, image: image)
         let post = Post(id: documentID,
                         userID: userID,
                         displayName: displayName,
@@ -105,6 +104,9 @@ actor PostsRepository {
         try await document.setDataAsync(from: post)
         updateLocalCache(posts: [post])
         return post
+    }
+    func deletePost(id: String) async throws {
+        try await postsRef.document(id).delete()
     }
 
     

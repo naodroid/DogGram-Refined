@@ -10,7 +10,7 @@ import SwiftUI
 
 
 @MainActor
-final class ProfileViewModel: ObservableObject {
+final class ProfileViewModel: ObservableObject, UseCasesModuleUsing {
     @Published private(set) var isMyProfile: Bool = false
     @Published private(set) var user: User?
     @Published private(set) var profileImage: UIImage = UIImage(named: "logo.loading")!
@@ -20,7 +20,7 @@ final class ProfileViewModel: ObservableObject {
     private let profileType: ProfileViewType
     private(set) var userID: String?
 
-    private let appModule: AppModule
+    let appModule: AppModule
     
     init(type: ProfileViewType, appModule: AppModule) {
         self.profileType = type
@@ -32,8 +32,7 @@ final class ProfileViewModel: ObservableObject {
         Task {
             switch profileType {
             case .topPage:
-                self.userID = await appModule.authRepository.currentUserID
-                print("USERID:\(self.userID)")
+                self.userID = await ownerUseCase.currentUserID
             case .specifiedUser(let userID):
                 self.userID = userID
             }
@@ -49,11 +48,10 @@ final class ProfileViewModel: ObservableObject {
             return
         }
         do {
-            async let myID =  appModule.authRepository.currentUserID
-            async let user =  appModule.usersRepository.getProfile(for: userID)
-            self.isMyProfile = await myID == userID
-            self.user = try await user
-            // TODO: fetch posts
+            let myId = await ownerUseCase.currentUserID
+            self.user = try await usersUseCase.getProfile(for: userID)
+            self.isMyProfile = myId == userID
+            self.posts = try await postsUseCase.getPostsForUser(userID)
         } catch {
             self.fetchError = error
         }
@@ -63,7 +61,7 @@ final class ProfileViewModel: ObservableObject {
             return
         }
         do {
-            let image = try await appModule.imagesRepository.downloadProfileImage(userID: userID)
+            let image = try await usersUseCase.getProfileImage(for: userID)
             self.profileImage = image
         } catch {
         }

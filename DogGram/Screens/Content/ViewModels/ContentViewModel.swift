@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class ContentViewModel: ObservableObject, AppModuleUsing {
+final class ContentViewModel: ObservableObject, UseCasesModuleUsing {
     let appModule: AppModule
     @Published private(set) var userLoggedIn = false
     private var cancellableList: [AnyCancellable] = []
@@ -23,7 +23,7 @@ final class ContentViewModel: ObservableObject, AppModuleUsing {
 
     func onAppear() {
         Task {
-            userLoggedIn = await authRepository.currentUser != nil
+            userLoggedIn = await ownerUseCase.currentUser != nil
         }.store(in: &cancellableList)
         
         EventDispatcher.stream.sink { event in

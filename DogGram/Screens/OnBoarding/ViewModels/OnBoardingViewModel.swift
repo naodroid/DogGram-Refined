@@ -11,7 +11,7 @@ import Combine
 import FirebaseAuth
 
 @MainActor
-final class OnBoardingViewModel: ObservableObject {
+final class OnBoardingViewModel: ObservableObject, UseCasesModuleUsing {
     
     @Published var displayName: String = ""
     @Published var email: String = ""
@@ -23,9 +23,7 @@ final class OnBoardingViewModel: ObservableObject {
     @Published private(set) var dismiss: Bool = false
     
     
-    private let appModule: AppModule
-    private var authRepository: AuthRepository { appModule.authRepository }
-    private var usersRepository: UsersRepository { appModule.usersRepository }
+    let appModule: AppModule
     
     private var cancellableList: [AnyCancellable] = []
     
@@ -41,36 +39,40 @@ final class OnBoardingViewModel: ObservableObject {
     
     // MARK: SignIn/Up (for OnBoardingPart1)
     func signInWithApple() {
-        commonSignIn(signInProcess: authRepository.startSignInWithApple)
-    }
-    func signInWithGoogle() {
-        commonSignIn(signInProcess: authRepository.startSignINWithGoogle)
-    }
-    private func commonSignIn(
-        signInProcess: @escaping () async throws -> LoginResult
-    ) {
         Task {
             do {
-                let result = try await signInProcess()
-                switch result {
-                case .existsUser(_):
-                    self.dismiss = true
-                case .newUser(let userID, let result):
-                    self.userID = userID
-                    self.email = result.email
-                    self.displayName = result.name
-                    self.provider = result.provider
-                    self.showOnBoardingPart2 = true
-                }
+                let loginResult = try await ownerUseCase.signInWithApple()
+                afterSignInProcess(loginResult: loginResult)
             } catch {
             }
         }.store(in: &cancellableList)
+    }
+    func signInWithGoogle() {
+        Task {
+            do {
+                let loginResult = try await ownerUseCase.signInWithGoogle()
+                afterSignInProcess(loginResult: loginResult)
+            } catch {
+            }
+        }.store(in: &cancellableList)
+    }
+    private func afterSignInProcess(loginResult: LoginResult) {
+        switch loginResult {
+        case .existsUser(_):
+            self.dismiss = true
+        case .newUser(let userID, let result):
+            self.userID = userID
+            self.email = result.email
+            self.displayName = result.name
+            self.provider = result.provider
+            self.showOnBoardingPart2 = true
+        }
     }
     
     func signUpAsAnonymous() {
         Task {
             do {
-                self.userID = try await authRepository.signUpAsAnonymous()
+                self.userID = try await ownerUseCase.signUpAsAnonymous()
                 self.email = ""
                 self.displayName = ""
                 self.provider = "anonymous"
@@ -88,7 +90,7 @@ final class OnBoardingViewModel: ObservableObject {
         }
         Task {
             do {
-                let _ = try await authRepository.createNewUser(
+                let _ = try await ownerUseCase.createNewUser(
                     userID: userID,
                     name: displayName,
                     email: email,

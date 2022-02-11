@@ -18,7 +18,7 @@ enum PostImageAlertType {
 }
 
 @MainActor
-final class PostImageViewModel: ObservableObject, AppModuleUsing {
+final class PostImageViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
     //
     let imageSelected: UIImage
     let appModule: AppModule
@@ -41,7 +41,6 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
     }
     
     
-    private(set) var currentUserID: String?
     private(set) var currentUserDisplayName: String?
     //
     private var cancellableList: [AnyCancellable] = []
@@ -57,15 +56,8 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
     
     func onAppear() {
         Task {
-            guard let userID = await authRepository.currentUserID else {
+            if await ownerUseCase.currentUserID == nil {
                 self.alertType = .initializingFailed(message: "Invalid User ID. Please signin again")
-                return
-            }
-            currentUserID = userID
-            do {
-                user = try await usersRepository.getProfile(for: userID)
-            } catch {
-                self.alertType = .initializingFailed(message: "Failed to fetch user info. Please try again.")
             }
         }.store(in: &cancellableList)
     }
@@ -75,16 +67,13 @@ final class PostImageViewModel: ObservableObject, AppModuleUsing {
     
     // MARK: UI events
     func postPicture() {
-        guard let user = user, let userID = user.id else {
-            self.alertType = .postFailed(message: "Invalid User Info. Please restart app.")
-            return
-        }
         Task {
+            if await ownerUseCase.currentUserID == nil {
+                self.alertType = .postFailed(message: "Invalid User Info. Please restart app.")
+                return
+            }
             do {
-                try await postsRepository.uploadPost(image: imageSelected,
-                                                     caption: captionText,
-                                                     displayName: user.displayName,
-                                                     userID: userID)
+                try await uploadPostUseCase.uploadPost(image: imageSelected, caption: captionText)
                 self.alertType = .postFinished
             } catch {
                 self.alertType = .postFailed(message: "Failed to upload (\(error.localizedDescription)")

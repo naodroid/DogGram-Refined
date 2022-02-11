@@ -28,16 +28,11 @@ actor AuthRepository {
     private let signInWithApple = SignInWithApple()
     private let signInWithGoole = SignInWithGoogle()
 
-    private let usersRepository: UsersRepository
-    private let imagesRepository: ImagesRepository
     private var authHandle: AuthStateDidChangeListenerHandle?
     
     private var cache: [String: Post] = [:]
     
-    nonisolated init(usersRepository: UsersRepository,
-                     imagesRepository: ImagesRepository) {
-        self.usersRepository = usersRepository
-        self.imagesRepository = imagesRepository
+    nonisolated init() {
         self.currentUser = DogGramStorage.currentUser
         
         if let user = Auth.auth().currentUser,
@@ -71,9 +66,7 @@ actor AuthRepository {
         }
     }
     
-    
-    
-    private func setCurrentUser(_ user: User?) {
+    func setCurrentUser(_ user: User?) {
         self.currentUser = user
         DogGramStorage.currentUser = user
         Event.onCurrentUserChanged(user: user).post()
@@ -82,29 +75,17 @@ actor AuthRepository {
     // MARK: Sign in with providers
     /// Start signin with apple
     /// After succeeded, call `createProfile` to create user account.
-    func startSignInWithApple() async throws -> LoginResult {
-        let result = try await signInWithApple.start()
-        return try await commonSignIn(result: result)
+    func startSignInWithApple() async throws -> SignInResult {
+        return try await signInWithApple.start()
     }
     /// Start signin with google
     /// After succeeded, call `createProfile` to create user account.
-    func startSignINWithGoogle() async throws -> LoginResult {
-        let result = try await signInWithGoole.start()
-        return try await commonSignIn(result: result)
+    func startSignInWithGoogle() async throws -> SignInResult {
+        return try await signInWithGoole.start()
     }
-    private func commonSignIn(result: SignInResult) async throws -> LoginResult {
-        let ret = try await Auth.auth().signIn(with: result.credential)
-        let userID = ret.user.uid
-        let user = try await usersRepository
-            .checkIfUserExists(fromUserID: userID)
-        if let user = user {
-            //existing user
-            setCurrentUser(user)
-            return LoginResult.existsUser(user: user)
-        } else {
-            //new user
-            return LoginResult.newUser(userID: userID, result: result)
-        }
+    func getFirebaseUserUID(result: SignInResult) async throws -> String {
+        let user = try await Auth.auth().signIn(with: result.credential)
+        return user.user.uid
     }
     
     // MARK: Anonymous sign in
@@ -115,47 +96,6 @@ actor AuthRepository {
         let userId = result.user.uid
         //Don't call `setUserID(:) here. Save it after profile is created.
         return userId
-    }
-    
-    // MARK: Create
-    /// Create user to database, return the created user
-    func createNewUser(
-        userID: String,
-        name: String,
-        email: String,
-        provider: String,
-        profileImage: UIImage
-    ) async throws -> User {
-        let user = try await usersRepository.createNewUser(
-            userID: userID,
-            name: name,
-            email: email,
-            provider: provider,
-            profileImage: profileImage
-        )
-        setCurrentUser(user)
-        return user
-    }
-    
-    // MARK: Profile
-    func update(displayName: String? = nil,
-                bio: String? = nil) async throws -> User? {
-        guard
-            var user = currentUser,
-            user.id != nil
-        else {
-            return currentUser
-        }
-        
-        if let name = displayName {
-            user.displayName = name
-        }
-        if let bio = bio {
-            user.bio = bio
-        }
-        try await usersRepository.updateProfile(for: user)
-        setCurrentUser(user)
-        return user
     }
 }
 

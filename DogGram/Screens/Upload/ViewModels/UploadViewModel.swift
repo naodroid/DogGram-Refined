@@ -11,7 +11,7 @@ import Combine
 
 
 @MainActor
-final class UploadViewModel: ObservableObject, AppModuleUsing {
+final class UploadViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
     @Published var currentUserID: String?
     @Published var imageSelected: UIImage = UIImage(named: "logo")!
     @Published var sourceType: UIImagePickerController.SourceType?
@@ -37,7 +37,7 @@ final class UploadViewModel: ObservableObject, AppModuleUsing {
     }
     func onAppear() {
         Task {
-            currentUserID = await authRepository.currentUserID
+            currentUserID = await ownerUseCase.currentUserID
         }.store(in: &cancellableList)
         
         EventDispatcher.stream.sink {[weak self] event in

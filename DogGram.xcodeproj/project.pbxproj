@@ -59,6 +59,9 @@
 		359EB737278AA207004B3EA2 /* ImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB736278AA207004B3EA2 /* ImagesRepository.swift */; };
 		359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB73A278BAF4D004B3EA2 /* UIImage+Ext.swift */; };
 		359EB73E278BB295004B3EA2 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359EB73D278BB295004B3EA2 /* AppModule.swift */; };
+		35A0C7DA27B5141100EDDBB9 /* OwnerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */; };
+		35A0C7DC27B5195700EDDBB9 /* PostsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */; };
+		35A0C7DE27B51B4000EDDBB9 /* UploadPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */; };
 		35A33E03274677CD005F29D5 /* DogGramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E02274677CD005F29D5 /* DogGramApp.swift */; };
 		35A33E05274677CD005F29D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E04274677CD005F29D5 /* ContentView.swift */; };
 		35A33E07274677CD005F29D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35A33E06274677CD005F29D5 /* Assets.xcassets */; };
@@ -81,6 +84,9 @@
 		35B28D46275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B28D45275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift */; };
 		35B28D48275C2D48009A9EDB /* OnBoardingViewPart2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B28D47275C2D48009A9EDB /* OnBoardingViewPart2.swift */; };
 		35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */; };
+		35CD97BB27AE0754008BE8D4 /* RepositoriesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97BA27AE0754008BE8D4 /* RepositoriesModule.swift */; };
+		35CD97BD27AE0767008BE8D4 /* UseCasesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97BC27AE0767008BE8D4 /* UseCasesModule.swift */; };
+		35CD97BF27AE07F0008BE8D4 /* UsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97BE27AE07F0008BE8D4 /* UsersUseCase.swift */; };
 		35E90E4A279CC90F009631BE /* gRPCCertificates-Cpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E48279CC90F009631BE /* gRPCCertificates-Cpp.bundle */; };
 		35E90E4B279CC90F009631BE /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E49279CC90F009631BE /* GoogleSignIn.bundle */; };
 		35E90E4F279CD3D1009631BE /* FirebaseTarget in Frameworks */ = {isa = PBXBuildFile; productRef = 35E90E4E279CD3D1009631BE /* FirebaseTarget */; };
@@ -171,6 +177,9 @@
 		359EB736278AA207004B3EA2 /* ImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesRepository.swift; sourceTree = "<group>"; };
 		359EB73A278BAF4D004B3EA2 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		359EB73D278BB295004B3EA2 /* AppModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
+		35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerUseCase.swift; sourceTree = "<group>"; };
+		35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsUseCase.swift; sourceTree = "<group>"; };
+		35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostUseCase.swift; sourceTree = "<group>"; };
 		35A33DFF274677CD005F29D5 /* DogGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35A33E02274677CD005F29D5 /* DogGramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogGramApp.swift; sourceTree = "<group>"; };
 		35A33E04274677CD005F29D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -194,6 +203,9 @@
 		35B28D45275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButtonCustom.swift; sourceTree = "<group>"; };
 		35B28D47275C2D48009A9EDB /* OnBoardingViewPart2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewPart2.swift; sourceTree = "<group>"; };
 		35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAnimationView.swift; sourceTree = "<group>"; };
+		35CD97BA27AE0754008BE8D4 /* RepositoriesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesModule.swift; sourceTree = "<group>"; };
+		35CD97BC27AE0767008BE8D4 /* UseCasesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesModule.swift; sourceTree = "<group>"; };
+		35CD97BE27AE07F0008BE8D4 /* UsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersUseCase.swift; sourceTree = "<group>"; };
 		35E90E48279CC90F009631BE /* gRPCCertificates-Cpp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "gRPCCertificates-Cpp.bundle"; sourceTree = "<group>"; };
 		35E90E49279CC90F009631BE /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		35E90E4C279CC94D009631BE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -545,6 +557,8 @@
 			isa = PBXGroup;
 			children = (
 				359EB73D278BB295004B3EA2 /* AppModule.swift */,
+				35CD97BA27AE0754008BE8D4 /* RepositoriesModule.swift */,
+				35CD97BC27AE0767008BE8D4 /* UseCasesModule.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -582,6 +596,7 @@
 				359EB722278A84EE004B3EA2 /* Repositories */,
 				35A33E1227468916005F29D5 /* Views */,
 				35882429278BBC4C00167C46 /* Screens */,
+				35CD97B927AE0633008BE8D4 /* Usecases */,
 				35232879276F0B5E0024E84D /* Utilities */,
 				35A33E06274677CD005F29D5 /* Assets.xcassets */,
 				35A33E10274687E6005F29D5 /* Launch Screen.storyboard */,
@@ -652,6 +667,17 @@
 				35A33E272747E193005F29D5 /* CommentModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		35CD97B927AE0633008BE8D4 /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+				35CD97BE27AE07F0008BE8D4 /* UsersUseCase.swift */,
+				35A0C7D927B5141100EDDBB9 /* OwnerUseCase.swift */,
+				35A0C7DB27B5195700EDDBB9 /* PostsUseCase.swift */,
+				35A0C7DD27B51B4000EDDBB9 /* UploadPostUseCase.swift */,
+			);
+			path = Usecases;
 			sourceTree = "<group>";
 		};
 		35EF9A27278CFE6C00E12E2A /* Profile */ = {
@@ -791,6 +817,7 @@
 			files = (
 				35882430278BC56300167C46 /* SignInResult.swift in Sources */,
 				353CC7B027927DE300417E8E /* Task+Ext.swift in Sources */,
+				35CD97BD27AE0767008BE8D4 /* UseCasesModule.swift in Sources */,
 				35882435278BCC3A00167C46 /* EventDispatcher.swift in Sources */,
 				35F1778C27A00458003EAB5D /* Firestore+Ext.swift in Sources */,
 				35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */,
@@ -832,6 +859,7 @@
 				350A468D279B7BAA00C846C6 /* UploadViewModel.swift in Sources */,
 				3588242C278BBC8200167C46 /* OnBoardingScreen.swift in Sources */,
 				3578AD902796398E00C17CBA /* FeedViewModel.swift in Sources */,
+				35A0C7DE27B51B4000EDDBB9 /* UploadPostUseCase.swift in Sources */,
 				350A4694279BADAC00C846C6 /* ContentScreen.swift in Sources */,
 				3578AD8C2796396900C17CBA /* FeedScreen.swift in Sources */,
 				35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */,
@@ -862,8 +890,12 @@
 				350A4691279B807400C846C6 /* PostImageViewModel.swift in Sources */,
 				3578ADA92796C76900C17CBA /* AnyCancellable+Ext.swift in Sources */,
 				359EB73B278BAF4D004B3EA2 /* UIImage+Ext.swift in Sources */,
+				35CD97BF27AE07F0008BE8D4 /* UsersUseCase.swift in Sources */,
+				35A0C7DC27B5195700EDDBB9 /* PostsUseCase.swift in Sources */,
+				35CD97BB27AE0754008BE8D4 /* RepositoriesModule.swift in Sources */,
 				350A469B279E21C500C846C6 /* BrowseScreen.swift in Sources */,
 				3520E249277DBDE900AB7C3A /* DataService.swift in Sources */,
+				35A0C7DA27B5141100EDDBB9 /* OwnerUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

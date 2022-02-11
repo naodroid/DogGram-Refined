@@ -9,21 +9,9 @@ import Foundation
 import SwiftUI
 
 class AppModule {
-    lazy var imagesRepository: ImagesRepository = ImagesRepository()
-    lazy var usersRepository: UsersRepository = UsersRepository(
-        imageRepository: imagesRepository
-    )
-    lazy var authRepository: AuthRepository = AuthRepository(
-        usersRepository: usersRepository,
-        imagesRepository: imagesRepository
-    )
-    lazy var postsRepository: PostsRepository = PostsRepository(
-        authRepository: authRepository,
-        usersRepository: usersRepository,
-        imagesRepository: imagesRepository
-    )
+    lazy var repositoriesModule = RepositoriesModule()
+    lazy var useCaseModule = UseCasesModule(repositoriesModule: self.repositoriesModule)
 }
-
 
 // 追加したいKeyをまず定義する
 struct AppModuleKey: EnvironmentKey {
@@ -37,18 +25,16 @@ extension EnvironmentValues {
     }
 }
 
-
-
 protocol AppModuleUsing {
     var appModule: AppModule { get }
-    var authRepository: AuthRepository { get }
+    //var authRepository: AuthRepository { get }
     var imagesRepository: ImagesRepository { get }
     var usersRepository: UsersRepository { get }
     var postsRepository: PostsRepository { get }
 }
 extension AppModuleUsing {
-    var authRepository: AuthRepository { appModule.authRepository }
-    var imagesRepository: ImagesRepository { appModule.imagesRepository }
-    var usersRepository: UsersRepository { appModule.usersRepository }
-    var postsRepository: PostsRepository {appModule.postsRepository }
+    //var authRepository: AuthRepository { appModule.repositoriesModule.authRepository }
+    var imagesRepository: ImagesRepository { appModule.repositoriesModule.imagesRepository }
+    var usersRepository: UsersRepository { appModule.repositoriesModule.usersRepository }
+    var postsRepository: PostsRepository {appModule.repositoriesModule.postsRepository }
 }

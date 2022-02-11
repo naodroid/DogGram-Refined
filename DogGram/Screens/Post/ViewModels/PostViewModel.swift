@@ -17,7 +17,7 @@ enum PostActionSheetOption {
 
 
 @MainActor
-final class PostViewModel: ObservableObject, AppModuleUsing {
+final class PostViewModel: ObservableObject, UseCasesModuleUsing, AppModuleUsing {
     //
     private(set) var currentUserID: String?
     private var imageFetched = false
@@ -78,7 +78,7 @@ final class PostViewModel: ObservableObject, AppModuleUsing {
     
     func onAppear() {
         Task {
-            currentUserID = await authRepository.currentUserID
+            currentUserID = await ownerUseCase.currentUserID
             if !imageFetched {
                 do {
                     guard let postID = post.id else {

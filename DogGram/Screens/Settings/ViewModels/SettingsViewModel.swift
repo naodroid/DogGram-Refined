@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class SettingsViewModel: ObservableObject, AppModuleUsing {
+final class SettingsViewModel: ObservableObject, UseCasesModuleUsing {
     let appModule: AppModule
     
     //
@@ -30,7 +30,7 @@ final class SettingsViewModel: ObservableObject, AppModuleUsing {
 
     func onAppear() {
         Task {
-            self.user = await authRepository.currentUser
+            self.user = await ownerUseCase.currentUser
         }.store(in: &cancellableList)
         
         EventDispatcher.stream.sink { event in
@@ -62,7 +62,7 @@ final class SettingsViewModel: ObservableObject, AppModuleUsing {
         }
         Task {
             do {
-                _ = try await authRepository.update(displayName: displayName, bio: bio)
+                _ = try await ownerUseCase.update(displayName: displayName, bio: bio)
                 showEditingFinishedAlert = true
                 print("FINISHED")
             } catch {
