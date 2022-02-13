@@ -14,11 +14,11 @@ final class SettingsViewModel: ObservableObject, UseCasesModuleUsing {
     let appModule: AppModule
     
     //
-    @Published private(set) var showSignOutError: Bool = false
-    @Published private(set) var showDeletingAccountError: Bool = false
     @Published private(set) var user: User?
+    @Published var showSignOutError: Bool = false
+    @Published var showDeletingAccountError: Bool = false
     @Published var showEditingFinishedAlert = false
-    
+    @Published var requireDismiss = false
     //
     private var cancellableList: [AnyCancellable] = []
     
@@ -29,6 +29,7 @@ final class SettingsViewModel: ObservableObject, UseCasesModuleUsing {
     }
 
     func onAppear() {
+        requireDismiss = false
         Task {
             self.user = await ownerUseCase.currentUser
         }.store(in: &cancellableList)
@@ -67,6 +68,27 @@ final class SettingsViewModel: ObservableObject, UseCasesModuleUsing {
                 print("FINISHED")
             } catch {
                 print("ERROR \(error)")
+            }
+        }.store(in: &cancellableList)
+    }
+    
+    func signOut() {
+        Task {
+            do {
+                try await ownerUseCase.signOut()
+                requireDismiss = true
+            } catch {
+                showSignOutError = true
+            }
+        }.store(in: &cancellableList)
+    }
+    func deleteAccount() {
+        Task {
+            do {
+                try await ownerUseCase.deleteAccount()
+                requireDismiss = true
+            } catch {
+                showDeletingAccountError = true
             }
         }.store(in: &cancellableList)
     }

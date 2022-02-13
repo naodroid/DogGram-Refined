@@ -41,6 +41,35 @@ actor PostsRepository {
         let posts = try await getPostsForFeed()
         return posts.shuffled()
     }
+    func getPostsForUser(userID: String) async throws -> [Post] {
+        let query = postsRef
+            .whereField(
+                Post.CodingKeys.userID.rawValue,
+                isEqualTo: userID
+            )
+        let posts = try await getPosts(with: query)
+        return posts
+    }
+    ///delete posts, return deleted post ids
+    func delete(posts: [Post]) async throws -> [String] {
+        return try await withThrowingTaskGroup(of: String.self) { group in
+            for p in posts {
+                guard let id = p.id else {
+                    continue
+                }
+                group.addTask {
+                    try await self.postsRef.document(id).delete()
+                    return id
+                }
+            }
+            var result: [String] = []
+            for try await p in group {
+                result.append(p)
+            }
+            return result
+        }
+    }
+    
     
     
     private func getPosts(with query: Query) async throws  -> [Post] {

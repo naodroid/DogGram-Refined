@@ -97,5 +97,9 @@ actor AuthRepository {
         //Don't call `setUserID(:) here. Save it after profile is created.
         return userId
     }
+    
+    func signOut() async throws {
+        try Auth.auth().signOut()
+    }
 }
 

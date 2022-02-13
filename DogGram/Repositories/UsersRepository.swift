@@ -19,9 +19,13 @@ protocol UsersRepository {
     
     func checkIfUserExists(fromUserID userID: String) async throws -> User?
 
+    // Delete
+    func deleteUser(userID: String) async throws
+    
     // Profile
     func getProfile(for userID: String) async throws -> User
     func updateProfile(for user: User) async throws
+    
 }
 
 /// Repository for users
@@ -63,6 +67,11 @@ actor UsersRepositoryImpl: UsersRepository {
         let user = User.decode(from: documents)
         return user
     }
+    
+    func deleteUser(userID: String) async throws {
+        try await usersRef.document(userID).delete()        
+    }
+
     
     
     // MARK: fetch

@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 
+let DB_BASE = Firestore.firestore()
+
 class DataService {
     static let instance = DataService()
     

@@ -18,7 +18,6 @@
 		351DE47F2769553200B75AB3 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */; };
 		3520E249277DBDE900AB7C3A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520E248277DBDE900AB7C3A /* DataService.swift */; };
 		3520E24B277FD53100AB7C3A /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520E24A277FD53100AB7C3A /* LazyView.swift */; };
-		35232876276DA8890024E84D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35232875276DA8890024E84D /* AuthService.swift */; };
 		35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35232877276DB51E0024E84D /* EnumsAndStructs.swift */; };
 		3523287B276F0B740024E84D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523287A276F0B740024E84D /* ImageManager.swift */; };
 		353CC7A7279271E700417E8E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7A6279271E700417E8E /* PostViewModel.swift */; };
@@ -115,7 +114,6 @@
 		351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		3520E248277DBDE900AB7C3A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		3520E24A277FD53100AB7C3A /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
-		35232875276DA8890024E84D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		35232877276DB51E0024E84D /* EnumsAndStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsAndStructs.swift; sourceTree = "<group>"; };
 		3523287A276F0B740024E84D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		353CC74F279266B100417E8E /* GoogleAppMeasurementIdentitySupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAppMeasurementIdentitySupport.xcframework; path = Firebase/FirebaseAnalytics/GoogleAppMeasurementIdentitySupport.xcframework; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 		35232874276DA8750024E84D /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				35232875276DA8890024E84D /* AuthService.swift */,
 				3520E248277DBDE900AB7C3A /* DataService.swift */,
 				359EB71A27847FA8004B3EA2 /* AnalyticsService.swift */,
 			);
@@ -844,7 +841,6 @@
 				35EF9A2D278CFEE800E12E2A /* ProfileViewType.swift in Sources */,
 				35F17786279FFC8C003EAB5D /* SettingsScreen.swift in Sources */,
 				35A33E1927468C8C005F29D5 /* FeedView.swift in Sources */,
-				35232876276DA8890024E84D /* AuthService.swift in Sources */,
 				359EB71B27847FA8004B3EA2 /* AnalyticsService.swift in Sources */,
 				35B28D46275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift in Sources */,
 				35882437278BCC5800167C46 /* Events.swift in Sources */,

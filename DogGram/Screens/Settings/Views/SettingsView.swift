@@ -99,7 +99,7 @@ struct SettingsView: View {
 
                     if viewModel.user != nil {
                         Button {
-                            signOut()
+                            viewModel.signOut()
                         } label: {
                             SettingsRowView(
                                 leftIcon: "figure.walk",
@@ -113,7 +113,7 @@ struct SettingsView: View {
                         }
 
                         Button {
-                            deleteAccount()
+                            viewModel.deleteAccount()
                         } label: {
                             SettingsRowView(
                                 leftIcon: "person.fill.xmark",
@@ -204,60 +204,6 @@ struct SettingsView: View {
         }
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
-        }
-    }
-    
-    func signOut() {
-        AuthService.instance.logOutUser {(success) in
-            if success {
-                self.presentationMode.wrappedValue.dismiss()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    let dict = UserDefaults.standard.dictionaryRepresentation()
-                    dict.keys.forEach {
-                        UserDefaults.standard.removeObject(forKey: $0)
-                    }
-                }
-            } else {
-                self.showSignOutError = true
-            }
-        }
-    }
-    func deleteAccount() {
-        guard let currentUserID = viewModel.user?.id else {
-            return
-        }
-        /// Remvoe all posts
-        /// It's hard to determine what to do when error happens.
-        /// This should be processed in server-transaction
-        DataService.instance.deleteAllPosts(fromUserID: currentUserID) { postIDs in
-            guard let postIDs = postIDs else {
-                showDeletingAccountError = true
-                return
-            }
-            // Remove all images, ignore error
-            for postID in postIDs {
-                ImageManager.instance.deletePostImage(postID: postID) { _ in
-                    //ignore error
-                }
-            }
-            // Delete Profile Image
-            ImageManager.instance.deleteProfileImage(userID: currentUserID) { _ in
-                // ignore error
-            }
-            // Remove Account from firebase
-            AuthService.instance.deleteUser(userID: currentUserID) {(success) in
-                if success {
-                    self.presentationMode.wrappedValue.dismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        let dict = UserDefaults.standard.dictionaryRepresentation()
-                        dict.keys.forEach {
-                            UserDefaults.standard.removeObject(forKey: $0)
-                        }
-                    }
-                } else {
-                    self.showDeletingAccountError = true
-                }
-            }
         }
     }
 }

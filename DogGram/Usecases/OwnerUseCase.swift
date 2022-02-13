@@ -37,6 +37,9 @@ protocol OwnerUseCase {
     
     /// Update owner profile
     func update(displayName: String?, bio: String?) async throws -> User?
+    
+    func signOut() async throws
+    func deleteAccount() async throws
 }
 
 // Usecase related to using user
@@ -128,5 +131,26 @@ class OwnerUseCaseImpl: OwnerUseCase, RepositoryModuleUsing {
         try await usersRepository.updateProfile(for: user)
         await authRepository.setCurrentUser(user)
         return user
+    }
+    
+    func signOut() async throws {
+        try await authRepository.signOut()
+        await authRepository.setCurrentUser(nil)
+    }
+    func deleteAccount() async throws {
+        guard let userID = await authRepository.currentUserID else {
+            throw NSError()
+        }
+        try await authRepository.signOut()
+        await authRepository.setCurrentUser(nil)
+        //delete profile
+        try? await usersRepository.deleteUser(userID: userID)
+        try? await imagesRepository.deleteProfileImage(userID: userID)
+        //delete posts
+        let posts = try await postsRepository.getPostsForUser(userID)
+        let ids = posts.compactMap(\.id)
+        for id in ids {
+            try await imagesRepository.deletePostImage(postID: id)
+        }
     }
 }
