@@ -88,7 +88,7 @@ struct SettingsView: View {
                         )
                     }
                     NavigationLink(
-                        destination: SettingsFeedbackView()
+                        destination: SettingsFeedbackScreen()
                     ) {
                         SettingsRowView(
                             leftIcon: "envelope",

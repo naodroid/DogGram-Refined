@@ -11,10 +11,7 @@ struct SettingsFeedbackView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
-    
-    @State var emailText: String = ""
-    @State var message: String = ""
-    @State var showSuccessAlert: Bool = false
+    @EnvironmentObject var viewModel: SettingsFeedbackViewModel
     
     var body: some View {
         VStack {
@@ -25,7 +22,7 @@ struct SettingsFeedbackView: View {
             
             TextField(
                 "Enter your email address(Optional)",
-                text: $emailText
+                text: $viewModel.emailText
             )
                 .padding()
                 .frame(height: 60)
@@ -38,7 +35,7 @@ struct SettingsFeedbackView: View {
                 .autocapitalization(.sentences)
             TextField(
                 "Feedback",
-                text: $message
+                text: $viewModel.message
             )
                 .padding()
                 .frame(height: 60)
@@ -52,7 +49,7 @@ struct SettingsFeedbackView: View {
             
             
             Button {
-                postFeedback()
+                viewModel.postFeedback()
             } label: {
                 Text("Upload!".uppercased())
                     .font(.title)
@@ -72,7 +69,7 @@ struct SettingsFeedbackView: View {
         .padding()
         .frame(maxWidth: .infinity)
         .navigationTitle("Feedback")
-        .alert(isPresented: $showSuccessAlert) { () -> Alert in
+        .alert(isPresented: $viewModel.showSuccessAlert) { () -> Alert in
             Alert(title: Text("Saved!"),
                   message: Text("Thank you for your feedback!"),
                   dismissButton: .default(
@@ -86,22 +83,9 @@ struct SettingsFeedbackView: View {
     }
     
     // MARK: functions
-    
-    func dismissView() {
+    private func dismissView() {
         self.presentationMode.wrappedValue.dismiss()
     }
-    
-    func postFeedback() {
-        DataService.instance.uploadFeedback(
-            email: emailText,
-            message: message) { success in
-                if success {
-                    self.showSuccessAlert = true
-                }
-                //TODO: Error alert
-            }
-    }
-    
 }
 
 struct SettingsFeedbackView_Previews: PreviewProvider {

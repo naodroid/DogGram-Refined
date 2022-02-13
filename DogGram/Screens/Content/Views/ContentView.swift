@@ -11,8 +11,6 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: ContentViewModel
     @Environment(\.colorScheme) var colorScheme
     
-    let browsePosts = PostArrayObject(shuffled: true)
-    
     var body: some View {
         TabView {
             NavigationView {

@@ -12,6 +12,7 @@ class RepositoriesModule {
     lazy var usersRepository: UsersRepository = UsersRepositoryImpl()
     lazy var authRepository: AuthRepository = AuthRepository()
     lazy var postsRepository: PostsRepository = PostsRepository()
+    lazy var feedbacksRepository: FeedbackRepository = FeedbackRepositoryImpl()
 }
 
 protocol RepositoryModuleUsing {
@@ -20,11 +21,13 @@ protocol RepositoryModuleUsing {
     var imagesRepository: ImagesRepository { get }
     var usersRepository: UsersRepository { get }
     var postsRepository: PostsRepository { get }
+    var feedbacksRepository: FeedbackRepository { get }
 }
 extension RepositoryModuleUsing {
     var authRepository: AuthRepository { repositoriesModule.authRepository }
     var imagesRepository: ImagesRepository { repositoriesModule.imagesRepository }
     var usersRepository: UsersRepository { repositoriesModule.usersRepository }
-    var postsRepository: PostsRepository {repositoriesModule.postsRepository }
+    var postsRepository: PostsRepository { repositoriesModule.postsRepository }
+    var feedbacksRepository: FeedbackRepository { repositoriesModule.feedbacksRepository }
 }
 

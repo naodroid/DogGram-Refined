@@ -92,4 +92,15 @@ final class SettingsViewModel: ObservableObject, UseCasesModuleUsing {
             }
         }.store(in: &cancellableList)
     }
+    
+    // MARK: Others
+    func postFeedback(email: String?, message: String) {
+        Task {
+            do {
+                try await feedbackUseCase.postFeedback(email: email, message: message)
+            } catch {
+                //TODO: error handling
+            }
+        }.store(in: &cancellableList)
+    }
 }
