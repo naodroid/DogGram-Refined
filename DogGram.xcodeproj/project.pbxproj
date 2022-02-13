@@ -419,6 +419,8 @@
 			isa = PBXGroup;
 			children = (
 				35A33E1A274693E8005F29D5 /* PostView.swift */,
+				35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */,
+				359EB72027891571004B3EA2 /* UnlikeAnimationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -497,6 +499,7 @@
 				35F17784279FFC76003EAB5D /* Settings */,
 				350A4687279B7B6700C846C6 /* Upload */,
 				35EF9A27278CFE6C00E12E2A /* Profile */,
+				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				35B28D43275C29F5009A9EDB /* OnBoardingView.swift */,
 				35B28D47275C2D48009A9EDB /* OnBoardingViewPart2.swift */,
 				3580C6DB275651C200035AF0 /* SignUpView.swift */,
+				35B28D45275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -653,35 +657,12 @@
 		35A33E1227468916005F29D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35A33E1327468922005F29D5 /* Screens */,
-				35A33E1427468927005F29D5 /* Subviews */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		35A33E1327468922005F29D5 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				35A33E02274677CD005F29D5 /* DogGramApp.swift */,
 				35A33E37274A2423005F29D5 /* ImagePicker.swift */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		35A33E1427468927005F29D5 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
 				35A33E33274A1C3A005F29D5 /* ImageGridView.swift */,
 				3520E24A277FD53100AB7C3A /* LazyView.swift */,
-				35B28D49275CE73B009A9EDB /* LikeAnimationView.swift */,
 				359EB71E27890FFC004B3EA2 /* LoggedInGuard.swift */,
-				356B9C66274E7A1A00543EF3 /* ProfileHeaderView.swift */,
-				3580C6D3275514D800035AF0 /* SettingsLabelView.swift */,
-				3580C6D527563F0900035AF0 /* SettingsRowView.swift */,
-				35B28D45275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift */,
-				359EB72027891571004B3EA2 /* UnlikeAnimationView.swift */,
 			);
-			path = Subviews;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		35A33E1527468B8A005F29D5 /* Helpers */ = {
@@ -731,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				356B9C64274E78FD00543EF3 /* ProfileView.swift */,
+				356B9C66274E7A1A00543EF3 /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -760,6 +742,8 @@
 				3580C6D7275647AF00035AF0 /* SettingsEditTextView.swift */,
 				3580C6D927564B6400035AF0 /* SettingsEditImageView.swift */,
 				359EB71C27890B07004B3EA2 /* SettingsFeedbackView.swift */,
+				3580C6D527563F0900035AF0 /* SettingsRowView.swift */,
+				3580C6D3275514D800035AF0 /* SettingsLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
