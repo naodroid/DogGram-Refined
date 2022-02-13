@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Usecase related to like/unlike post
+/// Usecase related to posting feedback
 protocol FeedbackUseCase {
     func postFeedback(email: String?, message: String) async throws
 }

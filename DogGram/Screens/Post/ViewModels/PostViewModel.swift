@@ -165,12 +165,17 @@ final class PostViewModel: ObservableObject, UseCasesModuleUsing {
         if likedByUser {
             unlikePost()
         } else {
-            likePost()
+            likePost(isDoubleTap: true)
         }
     }
-    func likePost() {
+    func likePost(isDoubleTap: Bool) {
         Task {
             await _likePost()
+            if isDoubleTap {
+                await analyticsUseCase.likePostDoubleTap()
+            } else {
+                await analyticsUseCase.likePostHeartPressed()
+            }
         }
     }
     private func _likePost() async {

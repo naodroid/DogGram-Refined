@@ -23,6 +23,8 @@ class UseCasesModule {
     lazy var commentsUseCase: CommentsUseCase = CommentsUseCaseImpl(repositoriesModule: repositoriesModule)
     //feedback
     lazy var feedbackUseCase: FeedbackUseCase = FeedbackUseCaseImpl(repositoriesModule: repositoriesModule)
+    //analytics
+    lazy var analyticsUseCase: AnalyticsUseCase = AnalyticsUseCaseImpl(repositoriesModule: repositoriesModule)
 
     init(repositoriesModule: RepositoriesModule) {
         self.repositoriesModule = repositoriesModule
@@ -42,6 +44,7 @@ protocol UseCasesModuleUsing {
     var likeUseCase: LikeUseCase { get }
     var commentsUseCase: CommentsUseCase { get }
     var feedbackUseCase: FeedbackUseCase { get }
+    var analyticsUseCase: AnalyticsUseCase { get }
 }
 extension UseCasesModuleUsing {
     var ownerUseCase: OwnerUseCase { appModule.useCaseModule.ownerUseCase }
@@ -51,4 +54,5 @@ extension UseCasesModuleUsing {
     var likeUseCase: LikeUseCase {  appModule.useCaseModule.likeUseCase }
     var commentsUseCase: CommentsUseCase { appModule.useCaseModule.commentsUseCase }
     var feedbackUseCase: FeedbackUseCase { appModule.useCaseModule.feedbackUseCase }
+    var analyticsUseCase: AnalyticsUseCase { appModule.useCaseModule.analyticsUseCase }
 }

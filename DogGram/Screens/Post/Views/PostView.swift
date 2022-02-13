@@ -60,8 +60,7 @@ struct PostView: View {
                     .scaledToFit()
                     .onTapGesture(count: 2) {
                         if !viewModel.likedByUser {
-                            AnalyticsService.instance.likePostDoubleTap()
-                            viewModel.likePost()
+                            viewModel.likePost(isDoubleTap: true)
                         }
                     }
                 if addHeartAnimationToView {
