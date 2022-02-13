@@ -74,11 +74,9 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(
-                        destination: SettingsEditImageView(
+                        destination: SettingsEditImageScreen(
                             title: "Profile Picture",
-                            description: "Your profile picture will bes hown on your profile and on your posts. MOst users make it an image of themselves or of their dog!",
-                            selectedImage: userProfilePicture,
-                            profileImage: $userProfilePicture
+                            description: "Your profile picture will bes hown on your profile and on your posts. MOst users make it an image of themselves or of their dog!"
                         )
                     ) {
                         SettingsRowView(

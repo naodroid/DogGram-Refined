@@ -24,7 +24,6 @@ protocol OwnerUseCase {
     /// start anonymous sign in
     func signUpAsAnonymous() async throws -> String
     
-    
     // MARK: Profile
     /// create user with profile
     func createNewUser(
@@ -37,7 +36,9 @@ protocol OwnerUseCase {
     
     /// Update owner profile
     func update(displayName: String?, bio: String?) async throws -> User?
-    
+    func updateProfileImage(_ image: UIImage) async throws
+
+    /// logout
     func signOut() async throws
     func deleteAccount() async throws
 }
@@ -131,6 +132,12 @@ class OwnerUseCaseImpl: OwnerUseCase, RepositoryModuleUsing {
         try await usersRepository.updateProfile(for: user)
         await authRepository.setCurrentUser(user)
         return user
+    }
+    func updateProfileImage(_ image: UIImage) async throws {
+        guard let userID = await authRepository.currentUserID else {
+            throw NSError()
+        }
+        try await imagesRepository.uploadProfileImage(userID: userID, image: image)
     }
     
     func signOut() async throws {

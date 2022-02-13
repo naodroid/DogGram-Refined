@@ -9,25 +9,16 @@ import SwiftUI
 
 struct SettingsEditImageView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: SettingsEditImageViewModel
     
-    @State var submissionText: String = ""
-    @State var title: String
-    @State var description: String
-    @State var selectedImage: UIImage
-    @State var showImagePicker: Bool = false
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var profileImage: UIImage
-    @State var showSuccessAlert: Bool = false
-    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
-
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Text(description)
+                Text(viewModel.description)
                 Spacer(minLength: 0)
             }
             
-            Image(uiImage: selectedImage)
+            Image(uiImage: viewModel.selectedImage)
                 .resizable()
                 .scaledToFill()
                 .frame(
@@ -39,8 +30,7 @@ struct SettingsEditImageView: View {
                 .cornerRadius(12)
             
             Button {
-                sourceType = .photoLibrary
-                showImagePicker = true
+                viewModel.onImportClick()
             } label: {
                 Text("Import".uppercased())
                     .font(.title)
@@ -52,18 +42,18 @@ struct SettingsEditImageView: View {
                     .cornerRadius(12)
             }
             .accentColor(Color.MyTheme.purpleColor)
-            .sheet(isPresented: $showImagePicker) {
+            .sheet(isPresented: $viewModel.showImagePicker) {
                 
             } content: {
                 ImagePicker(
-                    imageSelected: $selectedImage,
-                    sourceType: sourceType
+                    imageSelected: $viewModel.selectedImage,
+                    sourceType: viewModel.sourceType
                 )
             }
             
             
             Button {
-                saveImage()
+                viewModel.saveImage()
             } label: {
                 Text("Save".uppercased())
                     .font(.title)
@@ -80,8 +70,8 @@ struct SettingsEditImageView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .navigationTitle(title)
-        .alert(isPresented: $showSuccessAlert) { () -> Alert in
+        .navigationTitle(viewModel.title)
+        .alert(isPresented: $viewModel.showSuccessAlert) { () -> Alert in
             Alert(title: Text("Saved!"),
                   message: nil,
                   dismissButton: .default(
@@ -93,33 +83,13 @@ struct SettingsEditImageView: View {
             )
         }
     }
-    
-    // MARK: Functions
-    private func saveImage() {
-        guard let currentUserID = currentUserID else {
-            return
-        }
-        profileImage = selectedImage
-        ImageManager.instance.uploadProfileImage(userID: currentUserID,
-                                                image: selectedImage) { success in
-            if success {
-                showSuccessAlert = true
-            }
-        }
-        
-    }
 }
 
 struct SettingsEditImageView_Previews: PreviewProvider {
     @State static var profileImage: UIImage = UIImage(named: "dog1")!
     static var previews: some View {
         NavigationView {
-            SettingsEditImageView(
-                title: "Edit Display Name",
-                description: "Description",
-                selectedImage: UIImage(named: "dog1")!,
-                profileImage: $profileImage
-            )
+            SettingsEditImageView().environmentObject(SettingsEditImageViewModel(appModule: AppModule(), title: "", description: ""))
         }
     }
 }

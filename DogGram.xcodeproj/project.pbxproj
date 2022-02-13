@@ -17,7 +17,6 @@
 		350A469F279E222900C846C6 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A469E279E222900C846C6 /* BrowseViewModel.swift */; };
 		351DE47F2769553200B75AB3 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */; };
 		3520E24B277FD53100AB7C3A /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520E24A277FD53100AB7C3A /* LazyView.swift */; };
-		35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35232877276DB51E0024E84D /* EnumsAndStructs.swift */; };
 		3523287B276F0B740024E84D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523287A276F0B740024E84D /* ImageManager.swift */; };
 		353CC7A7279271E700417E8E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7A6279271E700417E8E /* PostViewModel.swift */; };
 		353CC7AB279272E000417E8E /* PostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CC7AA279272E000417E8E /* PostScreen.swift */; };
@@ -71,10 +70,8 @@
 		35A33E1727468B9D005F29D5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E1627468B9D005F29D5 /* Extensions.swift */; };
 		35A33E1927468C8C005F29D5 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E1827468C8C005F29D5 /* FeedView.swift */; };
 		35A33E1B274693E8005F29D5 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E1A274693E8005F29D5 /* PostView.swift */; };
-		35A33E202747D884005F29D5 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E1F2747D884005F29D5 /* PostModel.swift */; };
 		35A33E242747DE25005F29D5 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E232747DE25005F29D5 /* CommentsView.swift */; };
 		35A33E262747E060005F29D5 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E252747E060005F29D5 /* MessageView.swift */; };
-		35A33E282747E193005F29D5 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E272747E193005F29D5 /* CommentModel.swift */; };
 		35A33E30274A160F005F29D5 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E2F274A160F005F29D5 /* BrowseView.swift */; };
 		35A33E32274A16AA005F29D5 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E31274A16AA005F29D5 /* CarouselView.swift */; };
 		35A33E34274A1C3A005F29D5 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A33E33274A1C3A005F29D5 /* ImageGridView.swift */; };
@@ -94,6 +91,8 @@
 		35CD97EE27B898D6008BE8D4 /* SettingsFeedbackScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97ED27B898D6008BE8D4 /* SettingsFeedbackScreen.swift */; };
 		35CD97F027B899F4008BE8D4 /* AnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97EF27B899F4008BE8D4 /* AnalyticsRepository.swift */; };
 		35CD97F227B89A2A008BE8D4 /* AnalyticsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97F127B89A2A008BE8D4 /* AnalyticsUseCase.swift */; };
+		35CD97F427B89C52008BE8D4 /* SettingsEditImageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97F327B89C52008BE8D4 /* SettingsEditImageScreen.swift */; };
+		35CD97F627B89C78008BE8D4 /* SettingsEditImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CD97F527B89C78008BE8D4 /* SettingsEditImageViewModel.swift */; };
 		35E90E4A279CC90F009631BE /* gRPCCertificates-Cpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E48279CC90F009631BE /* gRPCCertificates-Cpp.bundle */; };
 		35E90E4B279CC90F009631BE /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35E90E49279CC90F009631BE /* GoogleSignIn.bundle */; };
 		35E90E4F279CD3D1009631BE /* FirebaseTarget in Frameworks */ = {isa = PBXBuildFile; productRef = 35E90E4E279CD3D1009631BE /* FirebaseTarget */; };
@@ -117,7 +116,6 @@
 		351DE47D276953A300B75AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		351DE47E2769553200B75AB3 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		3520E24A277FD53100AB7C3A /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
-		35232877276DB51E0024E84D /* EnumsAndStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsAndStructs.swift; sourceTree = "<group>"; };
 		3523287A276F0B740024E84D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		353CC74F279266B100417E8E /* GoogleAppMeasurementIdentitySupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAppMeasurementIdentitySupport.xcframework; path = Firebase/FirebaseAnalytics/GoogleAppMeasurementIdentitySupport.xcframework; sourceTree = "<group>"; };
 		353CC750279266B100417E8E /* GoogleAppMeasurement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAppMeasurement.xcframework; path = Firebase/FirebaseAnalytics/GoogleAppMeasurement.xcframework; sourceTree = "<group>"; };
@@ -197,10 +195,8 @@
 		35A33E1627468B9D005F29D5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		35A33E1827468C8C005F29D5 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		35A33E1A274693E8005F29D5 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
-		35A33E1F2747D884005F29D5 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		35A33E232747DE25005F29D5 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		35A33E252747E060005F29D5 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		35A33E272747E193005F29D5 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		35A33E2F274A160F005F29D5 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		35A33E31274A16AA005F29D5 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		35A33E33274A1C3A005F29D5 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
@@ -220,6 +216,8 @@
 		35CD97ED27B898D6008BE8D4 /* SettingsFeedbackScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeedbackScreen.swift; sourceTree = "<group>"; };
 		35CD97EF27B899F4008BE8D4 /* AnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRepository.swift; sourceTree = "<group>"; };
 		35CD97F127B89A2A008BE8D4 /* AnalyticsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCase.swift; sourceTree = "<group>"; };
+		35CD97F327B89C52008BE8D4 /* SettingsEditImageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditImageScreen.swift; sourceTree = "<group>"; };
+		35CD97F527B89C78008BE8D4 /* SettingsEditImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditImageViewModel.swift; sourceTree = "<group>"; };
 		35E90E48279CC90F009631BE /* gRPCCertificates-Cpp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "gRPCCertificates-Cpp.bundle"; sourceTree = "<group>"; };
 		35E90E49279CC90F009631BE /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		35E90E4C279CC94D009631BE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -435,16 +433,9 @@
 				353CC7AF27927DE300417E8E /* Task+Ext.swift */,
 				3578ADA82796C76900C17CBA /* AnyCancellable+Ext.swift */,
 				35F1778B27A00458003EAB5D /* Firestore+Ext.swift */,
+				35A33E1627468B9D005F29D5 /* Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		356CC65127600CB1002A7B94 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				356CC65227600CBB002A7B94 /* SignInProviders */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		356CC65227600CBB002A7B94 /* SignInProviders */ = {
@@ -540,6 +531,7 @@
 		359EB722278A84EE004B3EA2 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				356CC65227600CBB002A7B94 /* SignInProviders */,
 				359EB725278A86C0004B3EA2 /* AuthRepository.swift */,
 				359EB727278A8798004B3EA2 /* DogGramStorage.swift */,
 				359EB736278AA207004B3EA2 /* ImagesRepository.swift */,
@@ -626,10 +618,7 @@
 				359EB729278A88E6004B3EA2 /* Entities */,
 				35882433278BCC2C00167C46 /* Events */,
 				353CC7AE27927DD600417E8E /* Extensions */,
-				35A33E1527468B8A005F29D5 /* Helpers */,
-				35A33E1E2747D876005F29D5 /* Models */,
 				359EB73C278BB283004B3EA2 /* Module */,
-				356CC65127600CB1002A7B94 /* Services */,
 				350303D12797B3530091C546 /* Resources */,
 				359EB722278A84EE004B3EA2 /* Repositories */,
 				35A33E1227468916005F29D5 /* Views */,
@@ -661,24 +650,6 @@
 				359EB71E27890FFC004B3EA2 /* LoggedInGuard.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		35A33E1527468B8A005F29D5 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				35A33E1627468B9D005F29D5 /* Extensions.swift */,
-				35232877276DB51E0024E84D /* EnumsAndStructs.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		35A33E1E2747D876005F29D5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				35A33E1F2747D884005F29D5 /* PostModel.swift */,
-				35A33E272747E193005F29D5 /* CommentModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		35CD97B927AE0633008BE8D4 /* Usecases */ = {
@@ -731,6 +702,7 @@
 				35F17788279FFC99003EAB5D /* ViewModels */,
 				35F17785279FFC8C003EAB5D /* SettingsScreen.swift */,
 				35CD97ED27B898D6008BE8D4 /* SettingsFeedbackScreen.swift */,
+				35CD97F327B89C52008BE8D4 /* SettingsEditImageScreen.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -753,6 +725,7 @@
 			children = (
 				35F17789279FFCD4003EAB5D /* SettingsViewModel.swift */,
 				35CD97EB27B897C4008BE8D4 /* SettingsFeedbackViewModel.swift */,
+				35CD97F527B89C78008BE8D4 /* SettingsEditImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -849,9 +822,8 @@
 				35B28D46275C2B98009A9EDB /* SignInWithAppleButtonCustom.swift in Sources */,
 				35882437278BCC5800167C46 /* Events.swift in Sources */,
 				35A0C7E727B5F7CD00EDDBB9 /* CommentsViewModel.swift in Sources */,
-				35232878276DB51E0024E84D /* EnumsAndStructs.swift in Sources */,
-				35A33E202747D884005F29D5 /* PostModel.swift in Sources */,
 				3580C6D4275514D800035AF0 /* SettingsLabelView.swift in Sources */,
+				35CD97F627B89C78008BE8D4 /* SettingsEditImageViewModel.swift in Sources */,
 				35F1778A279FFCD4003EAB5D /* SettingsViewModel.swift in Sources */,
 				359EB731278A9790004B3EA2 /* UsersRepository.swift in Sources */,
 				35B28D44275C29F5009A9EDB /* OnBoardingView.swift in Sources */,
@@ -880,6 +852,7 @@
 				35A33E34274A1C3A005F29D5 /* ImageGridView.swift in Sources */,
 				356CC65427600CCA002A7B94 /* SignInWithApple.swift in Sources */,
 				359EB72B278A88F0004B3EA2 /* User.swift in Sources */,
+				35CD97F427B89C52008BE8D4 /* SettingsEditImageScreen.swift in Sources */,
 				35A33E1B274693E8005F29D5 /* PostView.swift in Sources */,
 				356B9C65274E78FD00543EF3 /* ProfileView.swift in Sources */,
 				350A468D279B7BAA00C846C6 /* UploadViewModel.swift in Sources */,
@@ -890,7 +863,6 @@
 				3578AD8C2796396900C17CBA /* FeedScreen.swift in Sources */,
 				35B28D4A275CE73B009A9EDB /* LikeAnimationView.swift in Sources */,
 				35A33E30274A160F005F29D5 /* BrowseView.swift in Sources */,
-				35A33E282747E193005F29D5 /* CommentModel.swift in Sources */,
 				3580C6DA27564B6400035AF0 /* SettingsEditImageView.swift in Sources */,
 				35CD97E627B894C4008BE8D4 /* FeedbackRepository.swift in Sources */,
 				350A469F279E222900C846C6 /* BrowseViewModel.swift in Sources */,
