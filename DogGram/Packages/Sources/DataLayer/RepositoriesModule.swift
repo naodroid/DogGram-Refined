@@ -10,8 +10,8 @@ import Foundation
 public class RepositoriesModule {
     public lazy var imagesRepository: ImagesRepository = ImagesRepositoryImpl()
     public lazy var usersRepository: UsersRepository = UsersRepositoryImpl()
-    public lazy var authRepository: AuthRepository = AuthRepository()
-    public lazy var postsRepository: PostsRepository = PostsRepository()
+    public lazy var authRepository: AuthRepository = AuthRepositoryImpl()
+    public lazy var postsRepository: PostsRepository = PostsRepositoryImpl()
     public lazy var feedbacksRepository: FeedbackRepository = FeedbackRepositoryImpl()
     public lazy var analyticsRepository: AnalyticsRepository = AnalyticsRepositoryImpl()
     

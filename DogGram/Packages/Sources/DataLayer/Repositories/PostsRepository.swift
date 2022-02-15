@@ -10,9 +10,49 @@ import UIKit
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+public protocol PostsRepository {
+    // MARK: Get
+    public func getPostsForUser(_ userID: String) async throws -> [Post]
+    public func getPostsForFeed() async throws -> [Post]
+    public func getPostsForBrowse() async throws -> [Post]
+    public func getPostsForUser(userID: String) async throws -> [Post]
+    public func delete(posts: [Post]) async throws -> [String]
+    /// return all posts related to ids.
+    public func getPosts(forPostIDs ids: [String]) -> [Post]
+    
+    // MARK: Create/Delete
+    @discardableResult
+    public func createPost(caption: String?,
+                           displayName: String,
+                           userID: String) async throws -> Post
+    
+    public func deletePost(id: String) async throws
+    
+    
+    // MARK: Like/Unlike
+    public func like(currentUserID: String, post: Post) async throws
+    public func unlike(currentUserID: String, post: Post) async throws
+    
+    // MARK: Comments
+    public func getComments(postID: String) async throws -> [Comment]
+    public func postComment(postID: String,
+                            content: String,
+                            displayName: String,
+                            userID: String) async throws -> Comment
+    public func delete(comment: Comment,
+                       in post: Post) async throws
+    
+    //MARK: Like comment
+    public func like(comment: Comment,
+                     in post: Post,
+                     userID: String) async throws
+    public func unlike(comment: Comment,
+                       in post: Post,
+                       userID: String) async throws
+}
 
 /// Repository for users
-public actor PostsRepository {
+public actor PostsRepositoryImpl: PostsRepository {
     private static let firestore = Firestore.firestore()
     private let postsRef = PostsRepository.firestore.collection("posts")
     private var cache: [String: Post] = [:]

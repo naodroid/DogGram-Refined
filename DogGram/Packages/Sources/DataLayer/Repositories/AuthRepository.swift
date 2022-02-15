@@ -16,13 +16,26 @@ public enum LoginResult {
     case newUser(userID: String, result: SignInResult)
 }
 
+public protocol AuthRepository {
+    var currentUser: User? { get async }
+    var currentUserID: String? { get async }
+    func setCurrentUser(_ user: User?) async
+    func startSignInWithApple() async throws -> SignInResult
+    func startSignInWithGoogle() async throws -> SignInResult
+    func getFirebaseUserUID(result: SignInResult) async throws -> String
+    func signUpAsAnonymous() async throws -> String
+    func signOut() async throws
+}
 
 /// Manage user info related to owner
-public actor AuthRepository {
+public actor AuthRepositoryImpl: AuthRepository {
     
-    public private(set) var currentUser: User?
+    public var currentUser: User? {
+        get async { _currentUser }
+    }
+    private var _currentUser: User?
     public var currentUserID: String? {
-        currentUser?.id
+        get async { _currentUser?.id }
     }
     
     private let signInWithApple = SignInWithApple()
@@ -33,10 +46,10 @@ public actor AuthRepository {
     private var cache: [String: Post] = [:]
     
     public nonisolated init() {
-        self.currentUser = DogGramStorage.currentUser
+        self._currentUser = DogGramStorage.currentUser
         
         if let user = Auth.auth().currentUser,
-           self.currentUser?.id != user.uid {
+           self._currentUser?.id != user.uid {
             //TODO: Check UserID is valid or not
         }
     }
@@ -55,10 +68,10 @@ public actor AuthRepository {
     }
     private func onStateChanged(auth: Auth, user: FirebaseAuth.User?) {
         guard let user = user else {
-            self.setCurrentUser(nil)
+            self._setCurrentUser(nil)
             return
         }
-        if user.uid == self.currentUser?.id {
+        if user.uid == self._currentUser?.id {
             //TODO: update info
         } else {
             //switch to new user
@@ -66,11 +79,15 @@ public actor AuthRepository {
         }
     }
     
-    public func setCurrentUser(_ user: User?) {
-        self.currentUser = user
+    public func setCurrentUser(_ user: User?) async {
+        self._setCurrentUser(user)
+    }
+    private func _setCurrentUser(_ user: User?) {
+        self._currentUser = user
         DogGramStorage.currentUser = user
         Event.onCurrentUserChanged(user: user).post()
     }
+
     
     // MARK: Sign in with providers
     /// Start signin with apple

@@ -9,6 +9,6 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-public struct FirebaseRepository {
-    public static let firestore = Firestore.firestore()
+enum FirebaseRepository {
+    static let firestore = Firestore.firestore()
 }

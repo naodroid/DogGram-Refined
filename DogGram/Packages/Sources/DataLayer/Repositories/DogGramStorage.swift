@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 @propertyWrapper
-public struct StoredValue<T> {
+struct StoredValue<T> {
     private let key: String
     private let defaultValue: T?
     
@@ -18,7 +18,7 @@ public struct StoredValue<T> {
         self.defaultValue = defaultValue
     }
     
-    public var wrappedValue: T? {
+    var wrappedValue: T? {
         get {
             // Read value from UserDefaults
             return UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
@@ -30,25 +30,25 @@ public struct StoredValue<T> {
     }
 }
 
-public struct DogGramStorage {
+struct DogGramStorage {
     // This id doesn't need to be stored in defaults.
     // Use firebase instead.
     @StoredValue(key: "userID", defaultValue: nil)
-    public static var userID: String?
+    static var userID: String?
     @StoredValue(key: "userDisplayName", defaultValue: nil)
-    public static var userDisplayName: String?
+    static var userDisplayName: String?
     @StoredValue(key: "userEmail", defaultValue: nil)
-    public static var userEmail: String?
+    static var userEmail: String?
     @StoredValue(key: "userProvider", defaultValue: nil)
-    public static var userProvider: String?
+    static var userProvider: String?
     @StoredValue(key: "userBio", defaultValue: nil)
-    public static var userBio: String?
+    static var userBio: String?
     @StoredValue(key: "userDateCreated", defaultValue: nil)
-    public static var userDateCreated: Date?
+    static var userDateCreated: Date?
     
     
     
-    public static var currentUser: User? {
+    static var currentUser: User? {
         get {
             guard
                 let id = self.userID,
