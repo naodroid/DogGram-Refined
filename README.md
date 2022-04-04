@@ -15,7 +15,4 @@ You need to take [the DogGram Course](https://www.udemy.com/course/building-dogg
 
 ## Issues
 
-- [ ] Fix warnings in Xcode13
-- [ ] Clean Architecture
-- [ ] Swift Concurrency
 - [ ] Use color assets more efficient (in dark theme)
